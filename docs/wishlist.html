@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliyan Collection - My Wishlist</title>
+    <link rel="icon" type="image/png" href="assets/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Reset and Base Styles */
+        :root {
+            --primary-color: #000;
+            --secondary-color: #fff;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-sale-text: #fff;
+            --sale-tag-color: #444;
+            --strikethrough-color: #888;
+            --accent-hover: #666;
+            --slider-track-color: #ddd;
+            --slider-thumb-color: #000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+        }
+
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            z-index: 99999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+            display: none;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--secondary-color);
+            background-color: transparent;
+            color: var(--secondary-color);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .btn:hover::after {
+            transform: scaleX(1);
+        }
+
+        .btn.dark {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .btn.dark:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        .btn.dark::after {
+            background-color: var(--primary-color);
+            transform-origin: left;
+        }
+
+        /* ============================================================
+           HEADER CSS — EXACT FROM about.html
+           ============================================================ */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: transparent;
+            transition: background-color 0.5s ease, padding 0.5s ease;
+            padding: 25px 0;
+        }
+
+        .header.sticky {
+            background-color: var(--secondary-color);
+            border-bottom: 1px solid var(--light-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* CRITICAL: WISHLIST PAGE HEADER READABILITY */
+        .header:not(.sticky) {
+            background-color: var(--secondary-color) !important;
+            border-bottom: 1px solid var(--light-bg) !important;
+            padding: 15px 0 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+        }
+        .header:not(.sticky) .nav-links a,
+        .header:not(.sticky) .hamburger {
+            color: var(--primary-color) !important;
+        }
+        .header:not(.sticky) .nav-icon-img {
+            filter: none !important;
+        }
+        .header:not(.sticky) .logo img {
+            filter: none !important;
+            opacity: 1 !important;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .logo img {
+            height: 60px;
+            filter: invert(1);
+            transition: filter 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            vertical-align: middle;
+        }
+
+        .logo-text-img {
+            display: inline-block;
+            height: 60px;
+            width: 120px;
+            object-fit: cover;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .header.sticky .logo img {
+            filter: none;
+            opacity: 1;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            position: absolute;
+            left: 15px;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 15px;
+        }
+
+        .nav-icons > a {
+            margin-left: 15px;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        .nav-icons > a:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .nav-icons > a.clicked {
+            animation: tapEffect 0.2s ease-out;
+        }
+
+        @keyframes tapEffect {
+            0% { transform: scale(1.0); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1.0); }
+        }
+
+        .nav-icon-img {
+            height: 20px;
+            width: auto;
+            filter: invert(1);
+            transition: filter 0.5s ease;
+            display: block;
+        }
+
+        .header.sticky .nav-icon-img {
+            filter: none;
+        }
+
+        .nav-links a:hover, .nav-icons a:hover {
+            opacity: 0.7;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 0.7em;
+            line-height: 1;
+            font-weight: bold;
+            display: none;
+        }
+
+        .header.sticky .cart-count {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-left: 15px;
+            font-style: normal;
+        }
+
+        /* MOBILE LOGO SIZE & RESPONSIVENESS — EXACT FROM about.html */
+        @media (max-width: 992px) {
+            .navbar {
+                justify-content: space-between;
+                padding: 0 15px;
+            }
+
+            .hamburger {
+                display: block;
+                position: static;
+                order: 1;
+                margin-left: 0;
+                flex-shrink: 0;
+            }
+
+            .logo {
+                order: 2;
+                flex-grow: 1;
+                text-align: center;
+                margin: 0 25px;
+            }
+
+            .logo img {
+                height: 55px;
+            }
+
+            .logo-text-img {
+                height: 55px;
+                width: 110px;
+            }
+
+            .nav-icons {
+                position: static;
+                order: 3;
+                gap: 15px;
+                flex-shrink: 0;
+            }
+
+            .nav-icons > a {
+                margin-left: 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 12px;
+            }
+
+            .logo {
+                margin: 0 20px;
+            }
+
+            .logo img {
+                height: 52px;
+            }
+
+            .logo-text-img {
+                height: 52px;
+                width: 104px;
+            }
+
+            .nav-icons {
+                gap: 12px;
+            }
+
+            .nav-icon-img {
+                height: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 10px;
+            }
+
+            .logo {
+                margin: 0 15px;
+            }
+
+            .logo img {
+                height: 48px;
+            }
+
+            .logo-text-img {
+                height: 48px;
+                width: 96px;
+            }
+
+            .nav-icons {
+                gap: 10px;
+            }
+
+            .nav-icon-img {
+                height: 20px;
+            }
+
+            .hamburger {
+                font-size: 1.3em;
+            }
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            max-width: 300px;
+            height: 100%;
+            background-color: var(--primary-color);
+            padding-top: 80px;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out;
+            z-index: 1050;
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--secondary-color);
+            font-size: 1.2em;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-style: normal;
+        }
+
+        /* ============================================================
+           END HEADER CSS FROM about.html
+           ============================================================ */
+
+        /* HERO (hidden on wishlist page) */
+        .hero {
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            display: none;
+        }
+
+        /* SECTIONS & HEADING STYLES */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .banner-page {
+            padding-top: 120px;
+            padding-bottom: 50px;
+            background-color: var(--secondary-color);
+        }
+
+        .banner-page h1 {
+            font-size: 3em;
+            text-align: center;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* WISHLIST CONTENT STYLES */
+        .wishlist-container h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wishlist-table-responsive {
+            overflow-x: auto;
+            margin-bottom: 60px;
+            border: 1px solid var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .wishlist-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .wishlist-table th, .wishlist-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        .wishlist-table th {
+            background-color: var(--light-bg);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .wishlist-table td {
+            vertical-align: middle;
+            font-size: 0.9em;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            min-width: 250px;
+        }
+
+        .product-info a {
+            font-weight: 700;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        .product-info a:hover {
+            color: var(--primary-color);
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 15px;
+            border: 1px solid #eee;
+            flex-shrink: 0;
+        }
+
+        .actions {
+            white-space: nowrap;
+        }
+
+        .actions .btn.dark {
+            padding: 8px 15px;
+            font-size: 0.8em;
+            margin-right: 10px;
+        }
+
+        .actions .remove-wishlist-btn {
+            background: none;
+            border: none;
+            color: #a00;
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+            padding: 0;
+            margin-left: 15px;
+        }
+
+        .actions .remove-wishlist-btn:hover {
+            color: red;
+            text-decoration: none;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 1.2em;
+            color: #999;
+        }
+
+        /* SHARE YOUR OWN PRODUCT FORM */
+        .share-product-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid var(--light-bg);
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .share-product-wrapper h2 {
+            margin-bottom: 30px;
+        }
+
+        .share-product-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .share-product-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .share-product-form input[type="text"],
+        .share-product-form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1em;
+        }
+
+        .file-upload-group {
+            position: relative;
+        }
+
+        .file-input-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: var(--secondary-color);
+            overflow: hidden;
+        }
+
+        .file-input-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .file-input-container .file-btn {
+            padding: 8px 15px;
+            font-size: 0.8em;
+            border-radius: 0;
+            border: none;
+            border-left: 1px solid var(--primary-color);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin: 0;
+        }
+
+        .file-input-container #file-name {
+            padding: 10px;
+            flex-grow: 1;
+            font-size: 0.9em;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .share-product-form .send-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* FOOTER STYLES */
+        .footer {
+            background-color: var(--secondary-color);
+            padding-top: 60px;
+            padding-bottom: 40px;
+            border-top: 1px solid var(--light-bg);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-bottom: 20px;
+        }
+
+        .footer-column {
+            width: 25%;
+            padding: 0 15px;
+        }
+
+        .footer-column:first-child {
+            text-align: center;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-color);
+            font-size: 0.9em;
+            padding: 3px 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons img {
+            height: 24px;
+            width: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover img {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--light-bg);
+            padding-top: 15px;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .live-clock {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* CART PANEL STYLES */
+        #cart-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 350px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+            z-index: 2000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-panel.open {
+            transform: translateX(0);
+        }
+
+        #cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-bg);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        #cart-header h3 {
+            text-transform: uppercase;
+            font-size: 1.1em;
+        }
+
+        #cart-items-container {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item-quantity-controls button {
+            background: var(--light-bg);
+            border: none;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            line-height: 1;
+            margin: 0 5px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .cart-item-remove:hover {
+            color: var(--primary-color);
+        }
+
+        #cart-footer {
+            padding-top: 15px;
+            border-top: 1px solid var(--light-bg);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        /* SEARCH BAR STYLES */
+        #search-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary-color);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+            border-bottom: 1px solid var(--light-bg);
+            display: none;
+        }
+
+        #search-bar.open {
+            display: block;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2em;
+            border: 1px solid var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .search-results-container {
+            padding: 20px 0;
+        }
+
+        .search-message {
+            text-align: center;
+            color: #999;
+            padding: 20px 0;
+        }
+
+        /* RESPONSIVE — non-header (footer, wishlist table) */
+        @media (max-width: 992px) {
+            /* Footer Responsive */
+            .footer .container {
+                justify-content: space-around;
+                gap: 30px;
+            }
+            .footer-column {
+                width: 40%;
+                margin-bottom: 20px;
+            }
+            .footer-column:first-child {
+                width: 100%;
+                text-align: center;
+            }
+            .footer-column:nth-child(2), .footer-column:nth-child(3), .footer-column:nth-child(4) {
+                text-align: center;
+            }
+
+            /* Wishlist adjustments */
+            .wishlist-table-responsive {
+                border: none;
+                margin-bottom: 30px;
+            }
+            .wishlist-table {
+                min-width: unset;
+                display: block;
+            }
+            .wishlist-table thead {
+                display: none;
+            }
+            .wishlist-table tr {
+                display: block;
+                margin-bottom: 20px;
+                border: 1px solid var(--light-bg);
+                border-radius: 5px;
+            }
+            .wishlist-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .wishlist-table td:last-child {
+                border-bottom: none;
+                flex-direction: row;
+                align-items: center;
+            }
+            .wishlist-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-right: 10px;
+                flex-shrink: 0;
+            }
+            .product-info {
+                width: 100%;
+            }
+            .actions {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .actions button.btn.dark {
+                width: 100%;
+                margin-top: 10px;
+                margin-right: 0;
+            }
+            .actions .remove-wishlist-btn {
+                margin-left: 0;
+                margin-top: 10px;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banner-page h1 {
+                font-size: 2.5em;
+            }
+
+            .footer-column {
+                width: 100%;
+                text-align: center;
+                padding: 0;
+            }
+            .footer-column h4 {
+                margin-top: 20px;
+            }
+            .share-product-wrapper {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cart-panel">
+        <div id="cart-header">
+            <h3>Shopping Cart (<span id="cart-count-panel">0</span>)</h3>
+            <span id="cart-close-btn" class="close-btn">&#10006;</span>
+        </div>
+        <div id="cart-items-container">
+        </div>
+        <div id="cart-empty-message" style="display: none; text-align: center; padding: 50px 0; color: #999;">
+            Your cart is empty.
+        </div>
+        <div id="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn dark full-width">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <div id="search-bar">
+        <div class="container">
+            <input type="text" id="search-input" placeholder="Search for products...">
+            <div class="search-results-container" id="search-results-container" style="display: none;">
+                <p class="search-message">Start typing to see matching products...</p>
+                <div class="search-product-grid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav" id="mobile-menu">
+        <span class="close-btn" onclick="toggleMobileMenu()">&#10006;</span>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mens.html">Men</a></li>
+            <li><a href="women.html">Women</a></li>
+            <li><a href="kids.html">Kids</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+    </div>
+
+    <!-- Header — Exact from about.html -->
+    <header class="header" id="home">
+        <div class="container navbar">
+            <div class="hamburger" onclick="toggleMobileMenu()">&#9776;</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="kids.html">Kids</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <a href="#home">
+                    <img src="assets/hlogo.png" alt="Aliyan Collection Logo">
+                    <img src="assets/logotext.png" alt="Aliyan Collection Text Logo" class="logo-text-img">
+                </a>
+            </div>
+            <div class="nav-icons">
+                <a href="#" id="search-icon-link">
+                    <img src="icons/search.png" alt="Search" class="nav-icon-img">
+                </a>
+                <a href="myaccount.html" id="about-icon-link">
+                    <img src="icons/about.png" alt="About" class="nav-icon-img">
+                </a>
+                <a href="wishlist.html" id="wishlist-icon-link">
+                    <img src="icons/wishlist.png" alt="Wishlist" class="nav-icon-img">
+                    <span class="cart-count" id="header-wishlist-count">0</span>
+                </a>
+                <a href="#" id="cart-icon-link">
+                    <img src="icons/shopping.png" alt="Cart" class="nav-icon-img">
+                    <span class="cart-count" id="header-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="banner-page">
+            <div class="container">
+                <h1>My Wishlist</h1>
+            </div>
+        </section>
+
+        <section class="wishlist-container section-padding">
+            <div class="container">
+
+                <h2>Your Saved Items</h2>
+                <div class="wishlist-table-responsive">
+                    <table class="wishlist-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="wishlist-table-body">
+                        </tbody>
+                    </table>
+                </div>
+                <p id="empty-wishlist-message" class="empty-message" style="display: none;">No products added to the wishlist.</p>
+
+                <div class="share-product-wrapper">
+                    <h2>Share Your Own Product</h2>
+                    <form class="share-product-form" id="share-product-form">
+                        <div class="form-group">
+                            <label for="share-name">Name (Your Name)</label>
+                            <input type="text" id="share-name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="share-email">Email (Your Email)</label>
+                            <input type="email" id="share-email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group file-upload-group">
+                            <label for="share-photo">Photo Upload</label>
+                            <div class="file-input-container">
+                                <input type="file" id="share-photo" accept="image/*">
+                                <span id="file-name">No file chosen</span>
+                                <button type="button" class="btn dark file-btn">Choose File</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn dark send-btn">Send</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <img src="assets/hlogo.png" alt="About Aliyan Collection" style="width: 150px; height: 150px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;">
+                <h4>Follow us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/creativestudi0.pk_" target="_blank">
+                        <img src="icons/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://instagram.com/creativestudi0.pk_" target="_blank">
+                        <img src="icons/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.tiktok.com/@creativestudi0.pk_" target="_blank">
+                        <img src="icons/tik-tok.png" alt="TikTok">
+                    </a>
+                    <a href="https://wa.me/923700256087" target="_blank">
+                        <img src="icons/whatsapp.png" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mens.html">Men's Shoes</a></li>
+                    <li><a href="women.html">Women's Shoes</a></li>
+                    <li><a href="kids.html">Kids Shoes</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="return.html">Return Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="my account.html">About Us</a></li>
+                    <li><a href="my account.html">Account</a></li>
+                    <li><a href="#" id="footer-cart-link">Cart</a></li>
+                    <li><a href="my account.html">My Account</a></li>
+                    <li><a href="my orders.html">My Orders</a></li>
+                    <li><a href="wishlist.html" id="footer-wishlist-link">Wishlist</a></li>
+                    <li><a href="track order.html">Track Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-contact">
+                <h4>Contact Info</h4>
+                <p>Korangi, Karachi, Pakistan</p>
+                <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8cffede0e9ffcce1e5fef6edefe3e0e0e9eff8e5e3e2a2efe3e1">[email&#160;protected]</a></p>
+                <p>Phone: 0315-7834820</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="live-clock" id="live-clock"></span>
+            <p>&copy; 2025 Aliyan Collection &mdash; All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // --- ALL CATEGORIES COMBINED (Mens, Womens, Kids) ---
+    const dummyProducts = [
+        // --- MENS PRODUCTS ---
+        { id: 'M-101', name: 'Slim Fit Denim Jeans', price: 95.00, originalPrice: 95.00, discount: '', sku: 'ALYM-JN101', image: 'product/m1.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-20') },
+        { id: 'M-102', name: 'Classic Black Suit', price: 219.00, originalPrice: 280.00, discount: '22%', sku: 'ALYM-ST102', image: 'product/m2.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-11-22') },
+        { id: 'M-103', name: 'Leather Biker Jacket', price: 180.00, originalPrice: 180.00, discount: '', sku: 'ALYM-JK103', image: 'product/m3.jpg', onSale: false, condition: 'pre-owned', dateAdded: new Date('2024-11-15') },
+        { id: 'M-104', name: 'Cotton Polo Shirt', price: 45.00, originalPrice: 60.00, discount: '25%', sku: 'ALYM-PS104', image: 'product/m4.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-11-25') },
+        { id: 'M-105', name: 'Running Sneakers', price: 110.00, originalPrice: 110.00, discount: '', sku: 'ALYM-SN105', image: 'product/m5.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-18') },
+        { id: 'M-106', name: 'Digital Watch', price: 85.00, originalPrice: 85.00, discount: '', sku: 'ALYM-WT106', image: 'product/m6.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-29') },
+        { id: 'M-107', name: 'Wool Scarf', price: 50.00, originalPrice: 50.00, discount: '', sku: 'ALYM-SF107', image: 'product/m7.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-01') },
+        { id: 'M-108', name: 'Casual T-Shirt', price: 35.00, originalPrice: 35.00, discount: '', sku: 'ALYM-TS108', image: 'product/m8.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-05') },
+        { id: 'M-109', name: 'Cargo Trousers', price: 75.00, originalPrice: 75.00, discount: '', sku: 'ALYM-TR109', image: 'product/m9.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-05') },
+        { id: 'M-110', name: 'Smart Dress Shirt', price: 65.00, originalPrice: 80.00, discount: '18.75%', sku: 'ALYM-DS110', image: 'product/m10.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-12-02') },
+        { id: 'M-111', name: 'Formal Leather Shoes', price: 130.00, originalPrice: 130.00, discount: '', sku: 'ALYM-SH111', image: 'product/m11.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-10') },
+        { id: 'M-112', name: 'Baseball Cap', price: 20.00, originalPrice: 20.00, discount: '', sku: 'ALYM-CP112', image: 'product/m12.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-08') },
+        { id: 'M-113', name: 'Hooded Sweatshirt', price: 70.00, originalPrice: 70.00, discount: '', sku: 'ALYM-SW113', image: 'product/m13.jpg', onSale: false, condition: 'pre-owned', dateAdded: new Date('2024-11-01') },
+        { id: 'M-114', name: 'Swim Shorts', price: 40.00, originalPrice: 50.00, discount: '20%', sku: 'ALYM-SS114', image: 'product/m14.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-12-04') },
+        { id: 'M-115', name: 'Denim Vest', price: 60.00, originalPrice: 60.00, discount: '', sku: 'ALYM-VT115', image: 'product/m15.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-28') },
+        { id: 'M-116', name: 'Designer Sunglasses', price: 150.00, originalPrice: 150.00, discount: '', sku: 'ALYM-SG116', image: 'product/m16.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-09') },
+        { id: 'M-117', name: 'V-Neck Sweater', price: 80.00, originalPrice: 80.00, discount: '', sku: 'ALYM-SW117', image: 'product/m17.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-26') },
+        { id: 'M-118', name: 'Plaid Flannel Shirt', price: 55.00, originalPrice: 55.00, discount: '', sku: 'ALYM-FS118', image: 'product/m18.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-07') },
+        { id: 'M-119', name: 'Winter Coat', price: 245.00, originalPrice: 245.00, discount: '', sku: 'ALYM-CT119', image: 'product/m19.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-11-03') },
+        { id: 'M-120', name: 'Leather Belt', price: 45.00, originalPrice: 45.00, discount: '', sku: 'ALYM-BT120', image: 'product/m20.jpg', onSale: false, condition: 'pre-owned', dateAdded: new Date('2024-11-12') },
+
+        // --- WOMENS PRODUCTS ---
+        { id: 'W-101', name: 'Elegant Silk Scarf', price: 65.00, originalPrice: 65.00, discount: '', sku: 'ALYW-SF101', image: 'product/w1.jpg', onSale: false },
+        { id: 'W-102', name: 'High-Waist Jeans', price: 80.00, originalPrice: 100.00, discount: '20%', sku: 'ALYW-JN102', image: 'product/w2.jpg', onSale: true },
+        { id: 'W-103', name: 'Leather Handbag', price: 150.00, originalPrice: 150.00, discount: '', sku: 'ALYW-HB103', image: 'product/w3.jpg', onSale: false },
+        { id: 'W-104', name: 'Cashmere Sweater', price: 120.00, originalPrice: 120.00, discount: '', sku: 'ALYW-SW104', image: 'product/w4.jpg', onSale: false },
+        { id: 'W-105', name: 'Pencil Skirt', price: 55.00, originalPrice: 55.00, discount: '', sku: 'ALYW-SK105', image: 'product/w5.jpg', onSale: false },
+        { id: 'W-106', name: 'Strappy Heels', price: 90.00, originalPrice: 120.00, discount: '25%', sku: 'ALYW-SH106', image: 'product/w6.jpg', onSale: true },
+        { id: 'W-107', name: 'Trench Coat', price: 220.00, originalPrice: 220.00, discount: '', sku: 'ALYW-CT107', image: 'product/w7.jpg', onSale: false },
+        { id: 'W-108', name: 'Statement Necklace', price: 79.99, originalPrice: 99.99, discount: '20%', sku: 'ALYW-JW108', image: 'product/w8.jpg', onSale: true },
+        { id: 'W-109', name: 'Midi Dress', price: 99.00, originalPrice: 99.00, discount: '', sku: 'ALYW-D109', image: 'product/w9.jpg', onSale: false },
+        { id: 'W-110', name: 'Stiletto Boots', price: 110.00, originalPrice: 110.00, discount: '', sku: 'ALYW-BT110', image: 'product/w10.jpg', onSale: false },
+        { id: 'W-111', name: 'Casual Cotton Tee', price: 30.00, originalPrice: 30.00, discount: '', sku: 'ALYW-TS111', image: 'product/w11.jpg', onSale: false },
+        { id: 'W-112', name: 'Diamond Earrings', price: 239.20, originalPrice: 299.00, discount: '20%', sku: 'ALYW-JW112', image: 'product/w12.jpg', onSale: true },
+        { id: 'W-113', name: 'Yoga Leggings', price: 45.00, originalPrice: 45.00, discount: '', sku: 'ALYW-AT113', image: 'product/w13.jpg', onSale: false },
+        { id: 'W-114', name: 'Denim Jacket', price: 135.00, originalPrice: 135.00, discount: '', sku: 'ALYW-JK114', image: 'product/w14.jpg', onSale: false },
+        { id: 'W-115', name: 'Maxi Skirt', price: 70.00, originalPrice: 70.00, discount: '', sku: 'ALYW-SK115', image: 'product/w15.jpg', onSale: false },
+        { id: 'W-116', name: 'Silk Blouse', price: 85.00, originalPrice: 85.00, discount: '', sku: 'ALYW-BL116', image: 'product/w16.jpg', onSale: false },
+        { id: 'W-117', name: 'Puffer Vest', price: 115.00, originalPrice: 115.00, discount: '', sku: 'ALYW-VT117', image: 'product/w17.jpg', onSale: false },
+        { id: 'W-118', name: 'Slip Dress', price: 105.00, originalPrice: 105.00, discount: '', sku: 'ALYW-D118', image: 'product/w18.jpg', onSale: false },
+        { id: 'W-119', name: 'Hoop Earrings', price: 40.00, originalPrice: 50.00, discount: '20%', sku: 'ALYW-JW119', image: 'product/w19.jpg', onSale: true },
+        { id: 'W-120', name: 'Wide-Leg Trousers', price: 95.00, originalPrice: 95.00, discount: '', sku: 'ALYW-TR120', image: 'product/w20.jpg', onSale: false },
+
+        // --- KIDS PRODUCTS ---
+        { id: 'K-001', name: 'Dinosaur Hooded Jumper', price: 65.00, originalPrice: 65.00, discount: '', sku: 'ALYK-HJ001', image: 'product/k1.jpg', onSale: false, condition: 'new', dateAdded: new Date('2025-01-01') },
+        { id: 'K-002', name: "Girl's Summer Dress", price: 55.00, originalPrice: 70.00, discount: '21.4%', sku: 'ALYK-DS002', image: 'product/k2.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-12-25') },
+        { id: 'K-003', name: 'Toddler Denim Overalls', price: 75.00, originalPrice: 75.00, discount: '', sku: 'ALYK-OA003', image: 'product/k3.jpg', onSale: false, condition: 'pre-owned', dateAdded: new Date('2025-01-05') },
+        { id: 'K-004', name: 'Sports Sneakers (Youth)', price: 90.00, originalPrice: 100.00, discount: '10%', sku: 'ALYK-SN004', image: 'product/k4.jpg', onSale: true, condition: 'new', dateAdded: new Date('2024-12-20') },
+        { id: 'K-005', name: 'Printed T-Shirt (Boys)', price: 30.00, originalPrice: 30.00, discount: '', sku: 'ALYK-TS005', image: 'product/k5.jpg', onSale: false, condition: 'new', dateAdded: new Date('2025-01-10') },
+        { id: 'K-006', name: 'Ballet Flats', price: 50.00, originalPrice: 50.00, discount: '', sku: 'ALYK-BF006', image: 'product/k6.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-15') },
+        { id: 'K-007', name: 'Winter Puffer Jacket', price: 120.00, originalPrice: 120.00, discount: '', sku: 'ALYK-PJ007', image: 'product/k7.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-18') },
+        { id: 'K-008', name: 'Cartoon Pajama Set', price: 45.00, originalPrice: 45.00, discount: '', sku: 'ALYK-PZ008', image: 'product/k8.jpg', onSale: false, condition: 'new', dateAdded: new Date('2025-01-07') },
+        { id: 'K-009', name: 'Adjustable Cap', price: 25.00, originalPrice: 25.00, discount: '', sku: 'ALYK-CP009', image: 'product/k9.jpg', onSale: false, condition: 'pre-owned', dateAdded: new Date('2024-12-28') },
+        { id: 'K-010', name: 'Striped Polo Shirt', price: 40.00, originalPrice: 55.00, discount: '27.3%', sku: 'ALYK-PS010', image: 'product/k10.jpg', onSale: true, condition: 'new', dateAdded: new Date('2025-01-02') },
+        { id: 'K-011', name: 'Rain Boots', price: 60.00, originalPrice: 60.00, discount: '', sku: 'ALYK-RB011', image: 'product/k11.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-10') },
+        { id: 'K-012', name: 'Little Princess Skirt', price: 70.00, originalPrice: 70.00, discount: '', sku: 'ALYK-SK012', image: 'product/k12.jpg', onSale: false, condition: 'new', dateAdded: new Date('2025-01-08') },
+        { id: 'K-013', name: 'Adventure Backpack', price: 85.00, originalPrice: 85.00, discount: '', sku: 'ALYK-BP013', image: 'product/k13.jpg', onSale: false, condition: 'new', dateAdded: new Date('2024-12-05') }
+    ];
+
+    // Global Cart System Variables
+    let cart = JSON.parse(localStorage.getItem('aliyanCart')) || [];
+    const cartPanel = document.getElementById('cart-panel');
+    const cartContainer = document.getElementById('cart-items-container');
+    const cartCountHeader = document.getElementById('header-cart-count');
+    const cartCountPanel = document.getElementById('cart-count-panel');
+    const cartTotalPriceEl = document.getElementById('cart-total-price');
+    const cartEmptyMessage = document.getElementById('cart-empty-message');
+
+    // Global Wishlist System Variables
+    let wishlist = JSON.parse(localStorage.getItem('aliyanWishlist')) || [];
+    const wishlistTableBody = document.getElementById('wishlist-table-body');
+    const emptyWishlistMessage = document.getElementById('empty-wishlist-message');
+    const headerWishlistCount = document.getElementById('header-wishlist-count');
+
+    // Search & Header Variables
+    const header = document.querySelector('.header');
+    const stickyThreshold = 100;
+    const searchBar = document.getElementById('search-bar');
+    const searchInput = document.getElementById('search-input');
+    const searchProductGrid = document.querySelector('.search-product-grid');
+    const searchResultsContainer = document.getElementById('search-results-container');
+
+    /* --- CORE FUNCTIONS --- */
+
+    function checkStickyHeader() {
+        if (window.pageYOffset > stickyThreshold) {
+            header.classList.add('sticky');
+        } else {
+            header.classList.remove('sticky');
+        }
+        if(searchBar.classList.contains('open')) {
+            const isSticky = window.pageYOffset > stickyThreshold || header.classList.contains('sticky');
+            searchBar.style.transform = isSticky ? 'translateY(50px)' : 'translateY(60px)';
+        }
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if(menu) menu.classList.toggle('open');
+    }
+
+    function updateLiveClock() {
+        const now = new Date();
+        const options = {
+            year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true,
+            timeZone: 'Asia/Karachi'
+        };
+        const dateTimeString = now.toLocaleString('en-US', options);
+        const clockEl = document.getElementById('live-clock');
+        if(clockEl) clockEl.textContent = 'Live (PKT): ' + dateTimeString;
+    }
+
+    function addIconAnimationListeners() {
+        const iconLinks = document.querySelectorAll('.nav-icons > a');
+        iconLinks.forEach(link => {
+            link.addEventListener('mousedown', function() { this.classList.add('clicked'); });
+            link.addEventListener('mouseup', function() { setTimeout(() => { this.classList.remove('clicked'); }, 200); });
+            link.addEventListener('mouseleave', function() { this.classList.remove('clicked'); });
+        });
+    }
+
+    function openCartPanel() {
+        cartPanel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCartPanel() {
+        cartPanel.classList.remove('open');
+        document.body.style.overflow = 'auto';
+    }
+
+    function toggleSearchBar() {
+        searchBar.classList.toggle('open');
+        const isSticky = window.pageYOffset > stickyThreshold || header.classList.contains('sticky');
+
+        if(searchBar.classList.contains('open')) {
+            searchBar.style.transform = isSticky ? 'translateY(50px)' : 'translateY(60px)';
+            searchInput.focus();
+            searchResultsContainer.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        } else {
+            searchBar.style.transform = 'translateY(-100%)';
+            searchResultsContainer.style.display = 'none';
+            searchInput.value = '';
+            searchProductGrid.innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        searchProductGrid.innerHTML = '';
+        const messageEl = document.querySelector('.search-message');
+
+        if (searchTerm.length < 2) {
+            messageEl.textContent = 'Keep typing to narrow down your search...';
+            return;
+        }
+
+        const matches = dummyProducts.filter(p => p.name.toLowerCase().includes(searchTerm));
+        if(matches.length > 0) {
+            messageEl.textContent = `Found ${matches.length} matching products:`;
+            matches.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'search-product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div>
+                        <h5>${product.name}</h5>
+                        <p>$${product.price.toFixed(2)}</p>
+                    </div>
+                `;
+                searchProductGrid.appendChild(card);
+            });
+        } else {
+            messageEl.textContent = `No products found matching "${searchTerm}".`;
+        }
+    }
+
+    function setupSearchListeners() {
+        const searchIcon = document.getElementById('search-icon-link');
+        if(searchIcon) {
+            searchIcon.addEventListener('click', (e) => { e.preventDefault(); toggleSearchBar(); });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && searchBar.classList.contains('open')) toggleSearchBar();
+        });
+        searchInput.addEventListener('input', filterProducts);
+    }
+
+    /* --- CART SYSTEM --- */
+
+    function getProductDetails(id) {
+        return dummyProducts.find(p => p.id === id);
+    }
+
+    function saveCart() {
+        localStorage.setItem('aliyanCart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    function addToCart(id, quantity = 1) {
+        const existingItem = cart.find(item => item.id === id);
+        const product = getProductDetails(id);
+        if (!product) return;
+
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ ...product, quantity: quantity });
+        }
+        saveCart();
+    }
+
+    function updateCartUI() {
+        cartContainer.innerHTML = '';
+        let totalItems = 0;
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartEmptyMessage.style.display = 'block';
+        } else {
+            cartEmptyMessage.style.display = 'none';
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalItems += item.quantity;
+                totalPrice += itemTotal;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <span class="cart-item-price">$${itemTotal.toFixed(2)}</span>
+                            <div class="cart-item-quantity-controls">
+                                <button onclick="changeQuantity('${item.id}', 'decrement')">&#8211;</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="changeQuantity('${item.id}', 'increment')">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">&#10006;</button>
+                    </div>`;
+            });
+        }
+        cartCountHeader.textContent = totalItems;
+        cartCountPanel.textContent = totalItems;
+        cartTotalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+        cartCountHeader.style.display = totalItems > 0 ? 'block' : 'none';
+    }
+
+    window.removeFromCart = function(id) {
+        cart = cart.filter(item => item.id !== id);
+        saveCart();
+    };
+
+    window.changeQuantity = function(id, action) {
+        const item = cart.find(item => item.id === id);
+        if (!item) return;
+        item.quantity = (action === 'increment') ? item.quantity + 1 : item.quantity - 1;
+        if (item.quantity <= 0) removeFromCart(id);
+        else saveCart();
+    };
+
+    function setupCartListeners() {
+        document.getElementById('cart-icon-link').addEventListener('click', (e) => { e.preventDefault(); openCartPanel(); });
+        document.getElementById('cart-close-btn').addEventListener('click', closeCartPanel);
+        const footerCart = document.getElementById('footer-cart-link');
+        if(footerCart) footerCart.addEventListener('click', (e) => { e.preventDefault(); openCartPanel(); });
+    }
+
+    /* --- WISHLIST SYSTEM --- */
+
+    function saveWishlist() {
+        localStorage.setItem('aliyanWishlist', JSON.stringify(wishlist));
+        updateWishlistUI();
+    }
+
+    function removeFromWishlist(id) {
+        wishlist = wishlist.filter(item => item.id !== id);
+        saveWishlist();
+    }
+
+    function moveToCart(id) {
+        addToCart(id);
+        removeFromWishlist(id);
+        openCartPanel();
+    }
+
+    function updateWishlistUI() {
+        wishlistTableBody.innerHTML = '';
+        headerWishlistCount.textContent = wishlist.length;
+        headerWishlistCount.style.display = wishlist.length > 0 ? 'block' : 'none';
+
+        if (wishlist.length === 0) {
+            emptyWishlistMessage.style.display = 'block';
+        } else {
+            emptyWishlistMessage.style.display = 'none';
+            wishlist.forEach(item => {
+                const product = getProductDetails(item.id) || item;
+                wishlistTableBody.innerHTML += `
+                    <tr data-id="${product.id}">
+                        <td class="product-info" data-label="Product Name">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <span>${product.name}</span>
+                        </td>
+                        <td data-label="Price">$${product.price.toFixed(2)}</td>
+                        <td class="actions" data-label="Actions">
+                            <button class="btn dark add-to-cart-btn" onclick="moveToCart('${product.id}')">Add to Cart</button>
+                            <button class="remove-wishlist-btn" onclick="removeFromWishlist('${product.id}')">Remove</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+    }
+
+    window.moveToCart = moveToCart;
+    window.removeFromWishlist = removeFromWishlist;
+
+    function setupWishlistListeners() {
+        const fileInput = document.getElementById('share-photo');
+        const fileNameSpan = document.getElementById('file-name');
+        if(fileInput) {
+            fileInput.addEventListener('change', function() {
+                fileNameSpan.textContent = this.files.length > 0 ? this.files[0].name : 'No file chosen';
+            });
+        }
+
+        const shareForm = document.getElementById('share-product-form');
+        if(shareForm) {
+            shareForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you! Your product submission has been received.');
+                this.reset();
+                if(fileNameSpan) fileNameSpan.textContent = 'No file chosen';
+            });
+        }
+
+        const footerWishlist = document.getElementById('footer-wishlist-link');
+        if(footerWishlist) footerWishlist.addEventListener('click', (e) => e.preventDefault());
+    }
+
+    /* --- INITIALIZATION --- */
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkStickyHeader();
+        updateLiveClock();
+        setInterval(updateLiveClock, 1000);
+
+        updateCartUI();
+        updateWishlistUI();
+
+        setupCartListeners();
+        setupSearchListeners();
+        setupWishlistListeners();
+        addIconAnimationListeners();
+
+        window.addEventListener('scroll', checkStickyHeader);
+    });
+    </script>
+</body>
+</html>
