@@ -1,0 +1,239 @@
+/* =====================================================================
+   COMPONENT: footer.css
+   Aliyan Collection - shared dark footer.
+   Markup lives in partials/footer.html (injected by js/components/footer.js).
+   ===================================================================== */
+
+.footer {
+    padding: 60px 0 30px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+.footer-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: start;                 /* every column starts on the same top line */
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* ------------------------- Brand column ------------------------- */
+.footer-main {
+    padding-right: 40px;
+    text-align: left;
+}
+
+.footer-logo {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.footer-description {
+    margin-bottom: 25px;
+    color: #cccccc;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.footer-contact-info p {
+    margin-bottom: 8px;
+    color: #cccccc;
+    font-size: 0.9em;
+    overflow-wrap: anywhere;
+}
+
+.footer-contact-info strong {
+    color: #ffffff;
+}
+
+.footer-contact-info a {
+    color: #cccccc;
+    transition: color 0.3s ease;
+}
+
+.footer-contact-info a:hover {
+    color: #ffffff;
+}
+
+/* ------------------------- Link columns ------------------------- */
+.footer-column h4 {
+    margin: 0 0 20px;
+    text-align: left;
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+}
+
+.footer-column ul {
+    margin: 0;
+    padding: 0;                         /* reset.css gives every ul 1.25em indent: links must start under the heading */
+    list-style: none;
+    text-align: left;
+}
+
+.footer-column ul li {
+    margin: 0 0 12px;
+    padding: 0;
+}
+
+.footer-column ul li:last-child {
+    margin-bottom: 0;
+}
+
+.footer-column ul li a {
+    display: inline-block;
+    color: #cccccc;
+    font-size: 0.9em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* ------------------------- Social + payment icons -------------------------
+   Same look for both: plain white glyph, NO circle / chip (the footer colour shows through).
+   40px box = comfortable tap target; the glyph itself is 22px. */
+.social-links {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 0 -9px;              /* -9px = (40 - 22) / 2, so the first glyph lines up with the text above */
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+    background: transparent;
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.social-links a:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.social-links img,
+.footer-payments img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);    /* dark svg glyph -> white */
+}
+
+/* ------------------------- Payment icons ------------------------- */
+.footer-payments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-payments img {
+    box-sizing: content-box;            /* glyph size comes from the shared rule above */
+    padding: 9px;                       /* 22px glyph + 2 x 9px = the same 40px box as a social icon */
+    border-radius: 50%;
+    background: transparent;
+    opacity: 0.85;
+}
+
+/* ------------------------- Bottom bar ------------------------- */
+.footer-bottom {
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin-bottom: 10px;
+    color: #cccccc;
+    font-size: 0.85em;
+}
+
+.live-clock {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 0.8em;
+    font-weight: var(--fw-light);
+    letter-spacing: var(--ls-tight);
+}
+
+/* ------------------------- Responsive ------------------------- */
+/* tablet: brand block on top (centred), then Shop | Support | Account side by side */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .footer-main {
+        grid-column: 1 / -1;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin: 0 auto 20px;
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-left: 0;                 /* centred row: no optical shift needed */
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 45px 0 25px;
+    }
+
+    .footer-grid {
+        gap: 25px;
+    }
+}
+
+/* phone: Shop | Support on one row, Account under Shop. Headings and links stay left-aligned in each column. */
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-logo {
+        width: 100px;
+        height: 100px;
+    }
+}

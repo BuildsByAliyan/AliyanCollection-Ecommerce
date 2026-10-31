@@ -1,0 +1,223 @@
+/* =====================================================================
+   BASE: typography.css
+   Fonts, headings, paragraphs and text utilities for the whole site.
+   Load AFTER variables.css and reset.css.
+   Page / component CSS can still override any size for its own section.
+   ===================================================================== */
+
+/* ------------------------- Body text ------------------------- */
+body {
+    font-family: var(--font-main, 'Montserrat', 'Helvetica Neue', Arial, sans-serif);
+    font-size: var(--fs-base, 1rem);
+    font-weight: var(--fw-regular, 400);
+    line-height: var(--lh-base, 1.6);
+    color: var(--text-color, #333);
+}
+
+/* ------------------------- Headings ------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-main, 'Montserrat', 'Helvetica Neue', Arial, sans-serif);
+    line-height: var(--lh-tight, 1.2);
+    color: var(--primary-color, #000);
+    overflow-wrap: break-word;
+}
+
+/* fluid sizes: they shrink smoothly on small screens, no media queries needed */
+h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: var(--fw-bold, 700);
+    letter-spacing: var(--ls-wide, 1px);
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+    font-weight: var(--fw-bold, 700);
+    letter-spacing: var(--ls-wide, 1px);
+    margin-bottom: 18px;
+}
+
+h3 {
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    font-weight: var(--fw-regular, 400);
+    margin-bottom: 14px;
+}
+
+h4 {
+    font-size: var(--fs-md, 1.125rem);
+    font-weight: var(--fw-bold, 700);
+    margin-bottom: 8px;
+}
+
+h5 {
+    font-size: var(--fs-base, 1rem);
+    font-weight: var(--fw-bold, 700);
+    margin-bottom: 6px;
+}
+
+h6 {
+    font-size: var(--fs-sm, 0.875rem);
+    font-weight: var(--fw-bold, 700);
+    letter-spacing: var(--ls-wide, 1px);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* ------------------------- Paragraphs & inline text ------------------------- */
+p {
+    margin-bottom: 1em;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+strong,
+b {
+    font-weight: var(--fw-bold, 700);
+}
+
+em,
+i,
+cite {
+    font-style: italic;
+}
+
+small {
+    font-size: var(--fs-sm, 0.875rem);
+}
+
+sub,
+sup {
+    font-size: 0.75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+mark {
+    background: #fff3a3;
+    color: var(--primary-color, #000);
+    padding: 0 3px;
+}
+
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+del,
+s {
+    text-decoration: line-through;
+}
+
+address {
+    font-style: normal;
+}
+
+blockquote {
+    margin: 0 0 1.2em;
+    padding-left: 20px;
+    border-left: 3px solid var(--primary-color, #000);
+    font-style: italic;
+    color: var(--color-text-soft, #555);
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+}
+
+code {
+    padding: 2px 6px;
+    background: var(--light-bg, #f5f5f5);
+    border-radius: var(--radius-sm, 2px);
+}
+
+/* ------------------------- Links ------------------------- */
+a {
+    color: var(--primary-color, #000);
+    transition: color var(--transition-base, 0.3s ease), opacity var(--transition-base, 0.3s ease);
+}
+
+/* Links inside long running text (add class="prose" to the text wrapper)
+   get an underline so they are recognisable. Menus, footer and buttons are
+   NOT affected because they are not inside .prose. */
+.prose a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ------------------------- Selection & placeholders ------------------------- */
+::selection {
+    background: var(--primary-color, #000);
+    color: var(--secondary-color, #fff);
+}
+
+::placeholder {
+    color: var(--color-text-muted, #777);
+    opacity: 1;
+}
+
+/* ------------------------- Text utilities ------------------------- */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+.text-upper  { text-transform: uppercase; }
+.text-muted  { color: var(--color-text-muted, #777); }
+.text-light  { color: var(--secondary-color, #fff); }
+.text-sale   { color: var(--color-sale, #d32f2f); }
+
+.fw-light    { font-weight: var(--fw-light, 300); }
+.fw-regular  { font-weight: var(--fw-regular, 400); }
+.fw-bold     { font-weight: var(--fw-bold, 700); }
+
+.ls-wide     { letter-spacing: var(--ls-wide, 1px); }
+.ls-wider    { letter-spacing: var(--ls-wider, 2px); }
+
+/* Main section heading used on the home page and shop pages
+   (eg. "New Arrivals"): big, centred, spaced-out capitals */
+.section-heading {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: var(--fw-bold, 700);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wider, 2px);
+    margin-bottom: 40px;
+}
+
+/* Small line of text under a heading */
+.sub-heading {
+    font-size: var(--fs-md, 1.125rem);
+    font-weight: var(--fw-light, 300);
+    color: var(--color-text-soft, #555);
+    line-height: var(--lh-base, 1.6);
+}
+
+/* Truncate text to 1 / 2 lines with "..." (product names in cards) */
+.line-clamp-1,
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-1 { -webkit-line-clamp: 1; line-clamp: 1; }
+.line-clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }

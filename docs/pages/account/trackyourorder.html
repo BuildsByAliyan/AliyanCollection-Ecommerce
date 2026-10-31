@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | Email or Phone | Aliyan Collection</title>
+    <meta name="description" content="Track your Aliyan Collection order using the email address or phone number you ordered with.">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Track Your Order | Email or Phone | Aliyan Collection">
+    <meta property="og:description" content="Track your Aliyan Collection order using the email address or phone number you ordered with.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../../assets/images/brand/favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/cart-panel.css">
+    <link rel="stylesheet" href="../../css/components/product-card.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/toast.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../../css/pages/account.css">
+</head>
+<body data-page="track-order" data-base="../../">
+
+    <noscript>
+        <p style="padding:16px;text-align:center;background:#000;color:#fff;font-family:Arial,sans-serif;">
+            Please enable JavaScript to browse products and use the shopping cart.
+        </p>
+    </noscript>
+
+    <!-- ===================== HEADER (cart, search, mobile menu, navbar) =====================
+         Filled automatically from partials/header.html by js/components/header.js -->
+    <div id="site-header"></div>
+
+    <main id="main-content">
+
+        <section class="banner-page">
+            <div class="container">
+                <h1>Track Your Order</h1>
+            </div>
+        </section>
+
+        <section class="track-section">
+            <div class="container">
+
+                <div class="track-card">
+                    <h2>Find Your Order</h2>
+                    <form id="track-order-form">
+                        <div class="track-form-group">
+                            <label for="contact-input">Enter Email or Phone Number:</label>
+                            <input type="text" id="contact-input" name="contact" placeholder="e.g., example@email.com or 03XX-XXXXXXX" autocomplete="off" required>
+                        </div>
+                        <button type="submit" class="btn track-submit">Track Order</button>
+                    </form>
+                </div>
+
+                <!-- Results are rendered here by track-order.js -->
+                <div class="order-results" id="order-results-container" hidden>
+                    <h3>Your Orders</h3>
+                    <div id="order-results-list"></div>
+                    <p class="order-results-empty" id="order-results-empty" hidden>
+                        No orders were found for that email or phone number. Please check the details and try again.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER =====================
+         Filled automatically from partials/footer.html by js/components/footer.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast notifications (also created automatically by toast.js if missing) -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===================== SCRIPTS (order matters) ===================== -->
+    <!-- Config + data -->
+    <script src="../../js/config.js" defer></script>
+    <script src="../../js/data/products.js" defer></script>
+
+    <!-- Core logic -->
+    <script src="../../js/core/utils.js" defer></script>
+    <script src="../../js/core/storage.js" defer></script>
+    <script src="../../js/core/cart.js" defer></script>
+    <script src="../../js/core/wishlist.js" defer></script>
+
+    <!-- Components -->
+    <script src="../../js/components/toast.js" defer></script>
+    <script src="../../js/components/header.js" defer></script>
+    <script src="../../js/components/footer.js" defer></script>
+    <script src="../../js/components/cart-panel.js" defer></script>
+    <script src="../../js/components/product-card.js" defer></script>
+
+    <!-- Page script -->
+    <script src="../../js/pages/track-order.js" defer></script>
+</body>
+</html>

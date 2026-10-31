@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#000000">
+    <title>Page Not Found | Aliyan Collection</title>
+    <meta name="description" content="This page could not be found. Visit the Aliyan Collection online fashion store for men's, women's and kids' clothing in Karachi, Pakistan.">
+
+    <!-- Search engines must not index this page (noindex above). These tags only make a shared link look right. -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aliyan Collection">
+    <meta property="og:title" content="Page Not Found | Aliyan Collection">
+    <meta property="og:description" content="This page could not be found. Visit the Aliyan Collection online fashion store for men's, women's and kids' clothing.">
+    <meta property="og:image" content="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/assets/images/brand/logo-monogram-light.jpg">
+    <meta property="og:image:alt" content="Aliyan Collection logo">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Page Not Found | Aliyan Collection">
+    <meta name="twitter:description" content="This page could not be found. Visit the Aliyan Collection online fashion store.">
+    <meta name="twitter:image" content="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/assets/images/brand/logo-monogram-light.jpg">
+
+    <!--
+        This page is served by GitHub Pages for ANY missing URL, at any folder depth.
+        So it is fully self-contained (inline CSS, no relative links in HTML) and
+        builds every link/image path from the site root with JavaScript below.
+    -->
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #111;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .brand { display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 28px; line-height: 0; }
+        .brand img { height: 56px; width: auto; object-fit: contain; display: block; }
+
+        .code {
+            font-size: clamp(88px, 22vw, 150px);
+            font-weight: 700;
+            letter-spacing: 6px;
+            line-height: 1;
+            color: #000;
+        }
+
+        .divider {
+            width: 56px;
+            height: 3px;
+            background: #000;
+            margin: 22px auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        p.msg { font-size: 15px; color: #555; margin-bottom: 8px; }
+        p.msg a { color: #111; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+        p.path {
+            font-size: 12px;
+            color: #999;
+            word-break: break-all;
+            margin-bottom: 30px;
+            min-height: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid #000;
+            transition: background .25s ease, color .25s ease;
+        }
+        .btn:hover, .btn:focus-visible { background: #fff; color: #000; }
+
+        .links {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 22px;
+        }
+        .links a {
+            color: #111;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: border-color .2s ease;
+        }
+        .links a:hover, .links a:focus-visible { border-bottom-color: #000; }
+
+        .foot { margin-top: 44px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <main class="wrap">
+        <a class="brand" id="brand-link" href="./" aria-label="Aliyan Collection - Home">
+            <img id="brand-logo" alt="" height="56">
+            <img id="brand-wordmark" alt="Aliyan Collection" height="56">
+        </a>
+
+        <div class="code" aria-hidden="true">404</div>
+        <div class="divider"></div>
+
+        <h1>Page Not Found</h1>
+        <p class="msg">Sorry, the page you are looking for does not exist or has been moved.</p>
+        <p class="msg">Looking for fashion? Visit the <a id="link-store" href="./">Aliyan Collection online fashion store</a> for men's, women's and kids' clothing.</p>
+        <p class="path" id="missing-path"></p>
+
+        <a class="btn" id="home-link" href="./">Back to Home</a>
+
+        <nav class="links" aria-label="Shop categories">
+            <a id="link-men"   href="./">Men</a>
+            <a id="link-women" href="./">Women</a>
+            <a id="link-kids"  href="./">Kids</a>
+            <a id="link-contact" href="./">Contact</a>
+        </nav>
+
+        <p class="foot">&copy; <span id="year">2026</span> Aliyan Collection</p>
+    </main>
+
+    <script>
+    (function () {
+        // Work out the site root:
+        //   GitHub project page : https://user.github.io/AliyanCollection-Ecommerce/...  -> "/AliyanCollection-Ecommerce/"
+        //   Custom domain / local server                                                  -> "/"
+        //   404.html opened directly (double-click / file:// / local server)             -> the folder that holds 404.html
+        var host = location.hostname;
+        var path = location.pathname;
+        var parts = path.split('/').filter(Boolean);
+        var root = '/';
+        if (/\/404\.html$/i.test(path)) {
+            root = path.replace(/404\.html$/i, '');
+        } else if (/\.github\.io$/i.test(host) && parts.length > 0) {
+            root = '/' + parts[0] + '/';
+        }
+
+        function setHref(id, path) {
+            var el = document.getElementById(id);
+            if (el) el.setAttribute('href', root + path);
+        }
+
+        setHref('brand-link',   'index.html');
+        setHref('home-link',    'index.html');
+        setHref('link-store',   'index.html');
+        setHref('link-men',     'pages/shop/mens.html');
+        setHref('link-women',   'pages/shop/women.html');
+        setHref('link-kids',    'pages/shop/kids.html');
+        setHref('link-contact', 'pages/info/contact.html');
+
+        // same two logo files as the navbar (floral AC mark + "Aliyan Collection" wordmark)
+        var logo = document.getElementById('brand-logo');
+        if (logo) logo.setAttribute('src', root + 'assets/images/brand/logo-mark-floral.png');
+        var word = document.getElementById('brand-wordmark');
+        if (word) word.setAttribute('src', root + 'assets/images/brand/logo-wordmark.png');
+
+        var pathEl = document.getElementById('missing-path');
+        if (pathEl) pathEl.textContent = location.pathname;
+
+        var yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+    </script>
+</body>
+</html>

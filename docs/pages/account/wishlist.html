@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | Saved Products | Aliyan Collection</title>
+    <meta name="description" content="View and manage the products you have saved to your Aliyan Collection wishlist.">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Wishlist | Saved Products | Aliyan Collection">
+    <meta property="og:description" content="View and manage the products you have saved to your Aliyan Collection wishlist.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../../assets/images/brand/favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/cart-panel.css">
+    <link rel="stylesheet" href="../../css/components/product-card.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/toast.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../../css/pages/account.css">
+</head>
+<body data-page="wishlist" data-base="../../">
+
+    <noscript>
+        <p style="padding:16px;text-align:center;background:#000;color:#fff;font-family:Arial,sans-serif;">
+            Please enable JavaScript to browse products and use the shopping cart.
+        </p>
+    </noscript>
+
+    <!-- ===================== HEADER (cart, search, mobile menu, navbar) =====================
+         Filled automatically from partials/header.html by js/components/header.js -->
+    <div id="site-header"></div>
+
+    <main id="main-content">
+
+        <section class="banner-page">
+            <div class="container">
+                <h1>My Wishlist</h1>
+            </div>
+        </section>
+
+        <section class="wishlist-container section-padding">
+            <div class="container">
+                <h2>Your Saved Items</h2>
+
+                <!-- Rows are rendered into the table body by account.js -->
+                <div class="wishlist-table-responsive" id="wishlist-table-wrap">
+                    <table class="wishlist-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="wishlist-table-body"></tbody>
+                    </table>
+                </div>
+
+                <!-- Shown by account.js when the wishlist is empty -->
+                <div id="empty-wishlist-message" class="empty-message" hidden>
+                    <p>No products added to the wishlist.</p>
+                    <a href="../shop/mens.html" class="btn dark">Start Shopping</a>
+                </div>
+
+                <div class="share-product-wrapper">
+                    <h2>Share Your Own Product</h2>
+                    <form class="share-product-form" id="share-product-form">
+                        <div class="form-group">
+                            <label for="share-name">Name (Your Name)</label>
+                            <input type="text" id="share-name" name="name" autocomplete="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="share-email">Email (Your Email)</label>
+                            <input type="email" id="share-email" name="email" autocomplete="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group file-upload-group">
+                            <label for="share-photo">Photo Upload</label>
+                            <div class="file-input-container">
+                                <input type="file" id="share-photo" name="photo" accept="image/*">
+                                <span id="file-name">No file chosen</span>
+                                <button type="button" class="btn dark file-btn" id="file-choose-btn">Choose File</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn dark send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER =====================
+         Filled automatically from partials/footer.html by js/components/footer.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast notifications (also created automatically by toast.js if missing) -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===================== SCRIPTS (order matters) ===================== -->
+    <!-- Config + data -->
+    <script src="../../js/config.js" defer></script>
+    <script src="../../js/data/products.js" defer></script>
+
+    <!-- Core logic -->
+    <script src="../../js/core/utils.js" defer></script>
+    <script src="../../js/core/storage.js" defer></script>
+    <script src="../../js/core/cart.js" defer></script>
+    <script src="../../js/core/wishlist.js" defer></script>
+
+    <!-- Components -->
+    <script src="../../js/components/toast.js" defer></script>
+    <script src="../../js/components/header.js" defer></script>
+    <script src="../../js/components/footer.js" defer></script>
+    <script src="../../js/components/cart-panel.js" defer></script>
+    <script src="../../js/components/product-card.js" defer></script>
+
+    <!-- Page script -->
+    <script src="../../js/pages/account.js" defer></script>
+</body>
+</html>

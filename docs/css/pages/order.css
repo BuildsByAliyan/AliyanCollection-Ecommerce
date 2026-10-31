@@ -1,0 +1,476 @@
+/* =====================================================================
+   PAGE: order.css  (pages/account/order.html)
+   Aliyan Collection - checkout: order summary, customer details,
+   payment method, confirmation modal, order history.
+   ===================================================================== */
+
+.order-section {
+    min-height: 100vh;
+    padding: 120px 0 50px;
+    background-color: var(--light-bg);
+}
+
+/* ------------------------- Empty cart ------------------------- */
+.order-empty {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    padding: 50px 30px;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.order-empty[hidden],
+.order-container[hidden],
+.order-history[hidden] {
+    display: none;
+}
+
+.order-empty h2 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.order-empty p {
+    margin-bottom: 25px;
+    color: var(--color-text-soft);
+}
+
+.order-empty-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* ------------------------- Layout ------------------------- */
+.order-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 40px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+.order-summary,
+.customer-details,
+.order-history {
+    padding: 30px;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2,
+.customer-details h2,
+.order-history h2 {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--light-bg);
+    color: var(--primary-color);
+    font-size: 1.8em;
+    text-transform: uppercase;
+}
+
+/* ------------------------- Order summary ------------------------- */
+.order-summary .order-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--light-bg);
+}
+
+.order-summary .order-item:last-child {
+    border-bottom: none;
+}
+
+.order-summary .order-item img {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    border: 1px solid var(--light-bg);
+    object-fit: cover;
+}
+
+.order-item-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.order-item-name {
+    margin-bottom: 5px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.order-item-price {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.order-item-quantity {
+    min-width: 60px;
+    text-align: center;
+}
+
+.order-item-subtotal {
+    min-width: 80px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.order-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--primary-color);
+}
+
+.order-total h3 {
+    color: var(--primary-color);
+    font-size: 1.3em;
+}
+
+.order-total-amount {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    font-weight: var(--fw-bold);
+}
+
+/* ------------------------- Form ------------------------- */
+.customer-details .form-group {
+    margin-bottom: 20px;
+}
+
+.customer-details .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.customer-details .form-group input,
+.customer-details .form-group textarea,
+.customer-details .form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 4px;
+    background: var(--secondary-color);
+    font-family: var(--font-main);
+    font-size: 1em;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.customer-details .form-group textarea {
+    resize: vertical;
+}
+
+.customer-details .form-group input:focus,
+.customer-details .form-group textarea:focus,
+.customer-details .form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.customer-details .form-group input.invalid,
+.customer-details .form-group textarea.invalid {
+    border-color: var(--color-error);
+}
+
+/* ------------------------- Payment method ------------------------- */
+.payment-methods {
+    margin: 25px 0;
+}
+
+.payment-methods h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.payment-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.payment-option label {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* extra fields (EasyPaisa / JazzCash / PayPal) - order.js removes the
+   [hidden] attribute (or adds .active) for the selected method */
+.payment-fields {
+    margin: 0 0 15px;
+    padding: 20px;
+    border-radius: 4px;
+    background: var(--light-bg);
+}
+
+.payment-fields[hidden] {
+    display: none;
+}
+
+.payment-fields .form-group {
+    margin-bottom: 0;
+}
+
+.payment-note {
+    margin-top: 10px;
+    padding: 12px 15px;
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0 4px 4px 0;
+    background: var(--light-bg);
+    color: var(--color-text-soft);
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.payment-note[hidden] {
+    display: none;
+}
+
+.confirm-order-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    font-family: var(--font-main);
+    font-size: 1.1em;
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.confirm-order-btn:hover,
+.confirm-order-btn:focus-visible {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.confirm-order-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ------------------------- Confirmation modal ------------------------- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-overlay.active,
+.modal-overlay.open,
+.modal-overlay[aria-hidden="false"] {
+    display: flex;
+}
+
+.confirmation-modal {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    padding: 40px;
+    overflow-y: auto;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    text-align: center;
+    animation: orderModalIn 0.5s var(--ease-smooth);
+}
+
+@keyframes orderModalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--primary-color);
+    font-size: 1.8em;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.confirmation-modal h2 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 1.8em;
+}
+
+.order-number {
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.delivery-countdown {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 4px;
+    background: var(--light-bg);
+}
+
+.countdown-timer {
+    margin: 10px 0;
+    color: var(--primary-color);
+    font-size: 2em;
+    font-weight: var(--fw-bold);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------- Order history ------------------------- */
+.order-history {
+    margin-top: 50px;
+}
+
+.history-item {
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 1px solid var(--light-bg);
+    border-radius: 4px;
+}
+
+.history-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.history-status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+}
+
+.status-delivered  { background: #28a745; color: #fff; }
+.status-dispatched { background: #ffc107; color: #212529; }
+.status-ordered    { background: #17a2b8; color: #fff; }
+
+.order-history-empty {
+    padding: 20px 0;
+    color: #999;
+    text-align: center;
+}
+
+.order-history-empty[hidden] {
+    display: none;
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width: 992px) {
+    .order-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .order-section {
+        padding: 100px 0 30px;
+    }
+
+    .order-summary,
+    .customer-details,
+    .order-history {
+        padding: 20px;
+    }
+
+    .order-summary h2,
+    .customer-details h2,
+    .order-history h2 {
+        font-size: 1.4em;
+    }
+
+    .order-summary .order-item {
+        flex-wrap: wrap;
+    }
+
+    .order-summary .order-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .order-item-details {
+        flex: 1 1 calc(100% - 80px);
+    }
+
+    .order-item-quantity,
+    .order-item-subtotal {
+        min-width: 0;
+        margin-top: 8px;
+    }
+
+    .confirmation-modal {
+        padding: 30px 20px;
+    }
+
+    .countdown-timer {
+        font-size: 1.6em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confirmation-modal {
+        animation: none;
+    }
+}
+
+/* ------------------------- WhatsApp button in confirmation modal (Task 1) -------------------------
+   Safety rule: modal background white hai, isliye button ka text/background
+   hamesha dark-on-white readable rahe. */
+#modal-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    color: #fff;
+    border: 1px solid #111;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#modal-whatsapp-btn:hover {
+    background: #000;
+}

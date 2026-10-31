@@ -1,0 +1,94 @@
+<!--
+  =====================================================================
+  PARTIAL: footer.html
+  Aliyan Collection — shared footer (loaded on every page)
+  ---------------------------------------------------------------------
+  {{BASE}} = relative path from the current page to the docs/ root.
+  It is replaced automatically by js/components/footer.js
+    index.html            -> ""        (empty)
+    pages/shop/mens.html  -> "../../"
+  Never hard-code paths here; always start with {{BASE}}.
+  =====================================================================
+-->
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+
+            <!-- ============ Brand / Contact ============ -->
+            <div class="footer-column footer-main">
+                <img src="{{BASE}}assets/images/brand/logo-monogram-dark.jpg" alt="Aliyan Collection" class="footer-logo" loading="lazy">
+                <p class="footer-description">
+                    Premium fashion collection offering the latest trends in men's, women's, and kids' apparel.
+                    Quality meets style in every piece we curate for our valued customers.
+                </p>
+                <div class="footer-contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:connect.aliyansaleem@gmail.com">connect.aliyansaleem@gmail.com</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:" data-phone-link>Call us</a></p>
+                    <p><strong>Location:</strong> Korangi, Karachi, Pakistan</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://facebook.com/creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <img src="{{BASE}}assets/icons/social/icon-facebook.svg" alt="Facebook" loading="lazy">
+                    </a>
+                    <a href="https://instagram.com/creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <img src="{{BASE}}assets/icons/social/icon-instagram.svg" alt="Instagram" loading="lazy">
+                    </a>
+                    <a href="https://www.tiktok.com/@creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                        <img src="{{BASE}}assets/icons/social/icon-tiktok.svg" alt="TikTok" loading="lazy">
+                    </a>
+                    <a href="https://wa.me/" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <img src="{{BASE}}assets/icons/social/icon-whatsapp.svg" alt="WhatsApp" loading="lazy">
+                    </a>
+                </div>
+            </div>
+
+            <!-- ============ Shop ============ -->
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="{{BASE}}pages/shop/mens.html">Men's Collection</a></li>
+                    <li><a href="{{BASE}}pages/shop/women.html">Women's Collection</a></li>
+                    <li><a href="{{BASE}}pages/shop/kids.html">Kids Collection</a></li>
+                    <li><a href="{{BASE}}index.html#new-arrivals">New Arrivals</a></li>
+                    <li><a href="{{BASE}}index.html#special-sale">Special Sale</a></li>
+                </ul>
+            </div>
+
+            <!-- ============ Support ============ -->
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="{{BASE}}pages/info/contact.html">Contact Us</a></li>
+                    <li><a href="{{BASE}}pages/info/about.html">About Us</a></li>
+                    <li><a href="{{BASE}}pages/legal/privacy.html">Privacy Policy</a></li>
+                    <li><a href="{{BASE}}pages/legal/return.html">Return Policy</a></li>
+                    <li><a href="{{BASE}}pages/account/trackyourorder.html">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- ============ Account ============ -->
+            <div class="footer-column">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="#" onclick="openCartPanel(); return false;">Shopping Cart</a></li>
+                    <li><a href="{{BASE}}pages/account/myaccount.html">My Account</a></li>
+                    <li><a href="{{BASE}}pages/account/wishlist.html">My Wishlist</a></li>
+                    <li><a href="{{BASE}}pages/account/order.html#order-history">Order History</a></li>
+                    <li><a href="{{BASE}}pages/account/order.html">Checkout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============ Accepted Payments ============ -->
+        <div class="footer-payments" aria-label="Accepted payment methods">
+            <img src="{{BASE}}assets/icons/payment/payment-cash-on-delivery.svg" alt="Cash on Delivery" loading="lazy">
+        </div>
+
+        <!-- ============ Bottom Bar ============ -->
+        <div class="footer-bottom">
+            <span class="live-clock" id="live-clock"></span>
+            <p>&copy; <span id="footer-year">2026</span> Aliyan Collection. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout &amp; Order History | Aliyan Collection</title>
+    <meta name="description" content="Review your cart, enter your delivery details and confirm your Aliyan Collection order. Your previous orders are listed on this page.">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Checkout &amp; Order History | Aliyan Collection">
+    <meta property="og:description" content="Review your cart, enter your delivery details and confirm your Aliyan Collection order. Your previous orders are listed on this page.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../../assets/images/brand/favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/cart-panel.css">
+    <link rel="stylesheet" href="../../css/components/product-card.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/toast.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../../css/pages/order.css">
+</head>
+<body data-page="order" data-base="../../">
+
+    <noscript>
+        <p style="padding:16px;text-align:center;background:#000;color:#fff;font-family:Arial,sans-serif;">
+            Please enable JavaScript to browse products and use the shopping cart.
+        </p>
+    </noscript>
+
+    <!-- ===================== HEADER (cart, search, mobile menu, navbar) =====================
+         Filled automatically from partials/header.html by js/components/header.js -->
+    <div id="site-header"></div>
+
+    <main class="order-section" id="main-content">
+        <!-- The page's single main heading (h1): visually hidden (.sr-only is in css/base/reset.css), still read by screen readers -->
+        <h1 class="sr-only">Checkout and Order History at Aliyan Collection</h1>
+
+        <div class="container">
+
+            <!-- Shown by order.js when the cart is empty -->
+            <div class="order-empty" id="order-empty" hidden>
+                <h2>Your cart is empty</h2>
+                <p>Add some products to your cart to place an order.</p>
+                <div class="order-empty-actions">
+                    <a href="../shop/mens.html" class="btn dark">Shop Men</a>
+                    <a href="../shop/women.html" class="btn dark">Shop Women</a>
+                    <a href="../shop/kids.html" class="btn dark">Shop Kids</a>
+                </div>
+            </div>
+
+            <div class="order-container" id="order-container">
+
+                <!-- ============ Order summary ============ -->
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div id="order-items-container"></div>
+                    <div class="order-total">
+                        <h3>Total Amount</h3>
+                        <div class="order-total-amount" id="order-total-amount">&mdash;</div>
+                    </div>
+                </div>
+
+                <!-- ============ Customer details ============ -->
+                <div class="customer-details">
+                    <h2>Customer Details</h2>
+                    <form id="order-form">
+                        <div class="form-group">
+                            <label for="customer-name">Full Name *</label>
+                            <input type="text" id="customer-name" name="name" autocomplete="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-email">Email Address *</label>
+                            <input type="email" id="customer-email" name="email" autocomplete="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-phone">Phone Number *</label>
+                            <input type="tel" id="customer-phone" name="phone" autocomplete="tel" placeholder="03XX-XXXXXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-address">Delivery Address *</label>
+                            <textarea id="customer-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+                        </div>
+
+                        <!-- ============ Payment method ============
+                             NOTE: card number / CVV fields are intentionally not collected. A static
+                             site has no payment gateway, so card data must never be typed here. -->
+                        <div class="payment-methods">
+                            <h3>Payment Method</h3>
+
+                            <div class="payment-option">
+                                <input type="radio" id="cod" name="payment" value="cod" checked>
+                                <label for="cod">Cash on Delivery</label>
+                            </div>
+
+                            <!-- Manual transfer options: product.js-style rule - they appear ONLY when switched on in
+                                 config.js (payments.easypaisa / payments.jazzcash with an account number). -->
+                            <div class="payment-option" id="easypaisa-option" hidden>
+                                <input type="radio" id="easypaisa" name="payment" value="easypaisa">
+                                <label for="easypaisa">EasyPaisa (send money, then WhatsApp the screenshot)</label>
+                            </div>
+                            <div class="payment-fields" id="easypaisa-fields" hidden>
+                                <p id="easypaisa-info"></p>
+                            </div>
+
+                            <div class="payment-option" id="jazzcash-option" hidden>
+                                <input type="radio" id="jazzcash" name="payment" value="jazzcash">
+                                <label for="jazzcash">JazzCash (send money, then WhatsApp the screenshot)</label>
+                            </div>
+                            <div class="payment-fields" id="jazzcash-fields" hidden>
+                                <p id="jazzcash-info"></p>
+                            </div>
+
+                            <p class="payment-note" id="payment-note" hidden>
+                                Send the payment to the account shown above, then WhatsApp us the screenshot with your order number. Your order is confirmed after we check the payment.
+                            </p>
+                        </div>
+
+                        <button type="submit" class="confirm-order-btn">Confirm Order</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- ============ Order history (this browser) ============ -->
+            <div class="order-history" id="order-history">
+                <h2>Order History</h2>
+                <div id="order-history-container">
+                    <p class="order-history-empty" id="order-history-empty">You have not placed any orders yet.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===================== ORDER CONFIRMATION MODAL ===================== -->
+    <div class="modal-overlay" id="confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="confirmation-modal">
+            <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
+            <h2 id="modal-title">Order Confirmed!</h2>
+            <div class="order-number" id="modal-order-number"></div>
+            <p>Your order is saved. WhatsApp has opened with your order details — please press Send there so we receive it. If WhatsApp did not open, tap the button below.</p>
+            <div class="delivery-countdown">
+                <p>Estimated delivery:</p>
+                <p><strong id="delivery-estimate">3-5 working days (estimate)</strong></p>
+                <p>This is only an estimate. For the real status of your order, message us on WhatsApp.</p>
+            </div>
+            <button type="button" class="btn dark" id="modal-continue-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- ===================== FOOTER =====================
+         Filled automatically from partials/footer.html by js/components/footer.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast notifications (also created automatically by toast.js if missing) -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===================== SCRIPTS (order matters) ===================== -->
+    <!-- Config + data -->
+    <script src="../../js/config.js" defer></script>
+    <script src="../../js/data/products.js" defer></script>
+
+    <!-- Core logic -->
+    <script src="../../js/core/utils.js" defer></script>
+    <script src="../../js/core/storage.js" defer></script>
+    <script src="../../js/core/cart.js" defer></script>
+    <script src="../../js/core/wishlist.js" defer></script>
+
+    <!-- Components -->
+    <script src="../../js/components/toast.js" defer></script>
+    <script src="../../js/components/header.js" defer></script>
+    <script src="../../js/components/footer.js" defer></script>
+    <script src="../../js/components/cart-panel.js" defer></script>
+    <script src="../../js/components/product-card.js" defer></script>
+
+    <!-- Order -> shop owner (WhatsApp + optional backup) - must load BEFORE order.js -->
+    <script src="../../js/core/order-notify.js" defer></script>
+
+    <!-- Page script -->
+    <script src="../../js/pages/order.js" defer></script>
+</body>
+</html>

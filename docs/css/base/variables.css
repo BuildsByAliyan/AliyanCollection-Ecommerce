@@ -1,0 +1,121 @@
+/* =====================================================================
+   BASE: variables.css
+   Aliyan Collection - design tokens (colors, fonts, spacing ...).
+   Change a value HERE and it changes everywhere on the site.
+   Load this file FIRST (before reset.css and typography.css).
+   ===================================================================== */
+
+:root {
+
+    /* ------------------------- Colors ------------------------- */
+    /* Original brand colors (same names as the first version of the site) */
+    --primary-color: #000000;        /* black  - text, buttons, header when scrolled */
+    --secondary-color: #ffffff;      /* white  - backgrounds, text on dark */
+    --text-color: #333333;           /* normal body text */
+    --light-bg: #f5f5f5;             /* light grey sections / borders */
+    --dark-sale-text: #000000;       /* text on the special-sale banner */
+
+    /* Extra greys (use these instead of writing new hex codes) */
+    --color-text-muted: #777777;     /* captions, dates, hints */
+    --color-text-soft: #555555;      /* secondary paragraphs */
+    --color-border: #e6e6e6;         /* thin lines and card borders */
+    --color-border-strong: #cccccc;  /* input borders */
+    --color-surface: #f6f6f4;        /* soft cards / panels */
+    --color-overlay: rgba(0, 0, 0, 0.6);
+
+    /* Status colors */
+    --color-success: #2e7d32;
+    --color-error: #c62828;
+    --color-warning: #b26a00;
+    --color-sale: #d32f2f;           /* sale badge / old price */
+    --color-focus: #1a73e8;          /* keyboard focus ring */
+
+    /* ------------------------- Fonts ------------------------- */
+    /* Montserrat is loaded from Google Fonts in every page <head> */
+    --font-main: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    --font-fallback: 'Helvetica Neue', Arial, sans-serif;
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-bold: 700;
+
+    /* Font sizes (rem = 16px by default) */
+    --fs-xs: 0.75rem;     /* 12px */
+    --fs-sm: 0.875rem;    /* 14px */
+    --fs-base: 1rem;      /* 16px */
+    --fs-md: 1.125rem;    /* 18px */
+    --fs-lg: 1.25rem;     /* 20px */
+    --fs-xl: 1.5rem;      /* 24px */
+    --fs-2xl: 2rem;       /* 32px */
+    --fs-3xl: 2.5rem;     /* 40px */
+    --fs-4xl: 3rem;       /* 48px */
+
+    --lh-tight: 1.2;
+    --lh-base: 1.6;
+    --lh-loose: 1.9;
+
+    --ls-tight: 0.5px;
+    --ls-wide: 1px;
+    --ls-wider: 2px;
+    --ls-widest: 4px;
+
+    /* ------------------------- Spacing ------------------------- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 100px;
+
+    /* ------------------------- Layout ------------------------- */
+    --container-max: 1200px;         /* width of the .container */
+    --container-pad: 15px;           /* left/right padding of .container */
+    --section-pad: 100px;            /* top/bottom padding of .section-padding */
+    --section-pad-mobile: 60px;
+
+    --header-height: 90px;           /* used for anchor offsets */
+    --header-height-sticky: 70px;
+
+    /* Responsive breakpoints (CSS variables cannot be used inside @media,
+       so these are the values to type there):
+         mobile  : max-width 640px
+         tablet  : max-width 992px   <- mobile menu starts here
+         desktop : above 992px                                              */
+
+    /* ------------------------- Shape & effects ------------------------- */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-round: 50%;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.18);
+
+    /* Motion tokens (soft + a bit slower than before). Use these instead of hard-coded durations:
+         --transition-fast  small colour / opacity changes      0.3 s
+         --transition-base  buttons, icons, links, hovers       0.45 s
+         --transition-slow  big or decorative changes           0.8 s
+         --transition-zoom  image hover zoom (scale 1.03)       0.9 s
+         panels / menus slide 0.5 s with --ease-in-out-smooth, hero cross-fade about 2 s */
+    --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);        /* gentle start, long soft landing */
+    --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);    /* soft at both ends (slides, fades) */
+    --transition-fast: 0.3s var(--ease-smooth);
+    --transition-base: 0.45s var(--ease-smooth);
+    --transition-slow: 0.8s var(--ease-smooth);
+    --transition-zoom: 0.9s var(--ease-smooth);
+
+    /* ------------------------- Layers (z-index) ------------------------- */
+    --z-base: 1;
+    --z-dropdown: 500;
+    --z-header: 1000;
+    --z-search: 1100;
+    --z-overlay: 1900;
+    --z-cart: 2000;
+    --z-mobile-menu: 2100;
+    --z-toast: 3000;
+    --z-intro: 99999;                /* intro splash screen is always on top */
+}

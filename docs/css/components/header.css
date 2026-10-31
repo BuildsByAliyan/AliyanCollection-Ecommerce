@@ -1,0 +1,739 @@
+/* =====================================================================
+   COMPONENT: header.css
+   Aliyan Collection - main header, navigation, icons, mobile menu.
+   Markup lives in partials/header.html (injected by js/components/header.js).
+   ---------------------------------------------------------------------
+   HOME page  (body[data-page="home"]) : header is transparent over the
+       hero and turns white when the page is scrolled (.header.sticky).
+   ALL OTHER pages : header is always white so it is readable.
+   Active link: header.js adds  .active  to the matching [data-nav] link.
+   ===================================================================== */
+
+/* ------------------------- Header bar ------------------------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-header);
+    width: 100%;
+    padding: 25px 0;
+    background-color: transparent;
+    transition: background-color 0.6s var(--ease-smooth), padding 0.6s var(--ease-smooth), box-shadow 0.6s var(--ease-smooth);
+}
+
+.header.sticky {
+    padding: 15px 0;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--light-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Transparent state = white text on the hero image */
+.header:not(.sticky) .nav-links a,
+.header:not(.sticky) .hamburger {
+    color: var(--secondary-color);
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ------------------------- Logo ------------------------- */
+.logo {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;                     /* no extra inline gap around the images */
+}
+
+.logo img {
+    height: 56px;
+    width: auto;
+    vertical-align: middle;
+    filter: invert(1);
+    opacity: 0;                         /* logo appears once the header turns white */
+    transition: filter 0.6s var(--ease-smooth), opacity 0.6s var(--ease-smooth);
+}
+
+.logo-text-img {
+    display: inline-block;
+    height: 56px;
+    width: auto;                        /* width follows the image ratio, so nothing is cropped */
+    max-width: 100%;
+    margin-left: 5px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.header.sticky .logo img {
+    filter: none;
+    opacity: 1;
+}
+
+/* ------------------------- Desktop links ------------------------- */
+.nav-links {
+    position: absolute;
+    left: 15px;
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    position: relative;
+    padding: 5px 0;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-tight);
+    transition: color 0.4s var(--ease-smooth), opacity 0.4s var(--ease-smooth);
+}
+
+/* animated underline (hover + current page) */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-smooth);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after,
+.nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+/* ------------------------- Icons (search, account, wishlist, cart) ------------------------- */
+.nav-icons {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons > a {
+    position: relative;
+    margin-left: 15px;
+    transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+
+.nav-icons > a:hover {
+    opacity: 0.7;
+    transform: scale(1.06);
+}
+
+.nav-icons > a.clicked {
+    animation: tapEffect 0.25s var(--ease-smooth);       /* header.js removes .clicked after 250 ms */
+}
+
+@keyframes tapEffect {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(0.94); }
+    100% { transform: scale(1); }
+}
+
+.nav-icon-img {
+    display: block;
+    width: auto;
+    height: 20px;
+    filter: invert(1);                  /* white icons on the transparent header */
+    transition: filter 0.6s var(--ease-smooth);
+}
+
+.header.sticky .nav-icon-img {
+    filter: none;                       /* black icons on the white header */
+}
+
+/* Little number bubble on wishlist / cart icons.
+   Hidden until JS sets a count (style.display = 'block') or adds .visible */
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    display: none;
+    min-width: 16px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 0.7em;
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+    text-align: center;
+}
+
+.cart-count.visible,
+.cart-count.has-items {
+    display: block;
+}
+
+/* On the transparent header the bubble must stay visible: white bubble, black text */
+.header:not(.sticky) .cart-count {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.header.sticky .cart-count {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* Small "pop" when the number changes (JS adds .bump) */
+.cart-count.bump {
+    animation: countBump 0.35s var(--ease-in-out-smooth);   /* header.js removes .bump after 350 ms */
+}
+
+@keyframes countBump {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ------------------------- Hamburger (mobile only) ------------------------- */
+.hamburger {
+    display: none;
+    margin-left: 15px;
+    font-size: 1.5em;
+    font-style: normal;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ------------------------- Mobile slide-in menu -------------------------
+   Layout (top -> bottom): brand + close | search | 7 links | account / wishlist / cart | social | copyright.
+   The panel is a flex column: .mm-bottom has margin-top:auto, so it sits at the bottom on tall phones
+   and everything simply scrolls on very short ones. Black/white only (CSS variables).               */
+.mm-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-mobile-menu) - 1);
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s var(--ease-in-out-smooth), visibility 0s linear 0.5s;
+}
+
+.mm-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s var(--ease-in-out-smooth), visibility 0s;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-mobile-menu);
+    display: flex;
+    flex-direction: column;
+    width: 100%;                        /* full-screen menu (was 85vw / max 320px) */
+    max-width: none;
+    height: 100%;
+    height: 100dvh;
+    /* safe-area-inset = notches / home bar on modern phones */
+    padding: max(18px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.5s var(--ease-in-out-smooth), visibility 0s linear 0.5s;
+}
+
+.mobile-nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.5s var(--ease-in-out-smooth), visibility 0s;
+}
+
+/* --- top row: brand + close --- */
+.mm-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.mm-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    line-height: 0;
+}
+
+/* the header logo files are black on white -> invert them to white on the black panel */
+.mm-brand img {
+    width: auto;
+    filter: invert(1);
+}
+
+.mm-brand-mark { height: 48px; }
+.mm-brand-text { height: 40px; }
+
+.mobile-nav .close-btn {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+}
+
+.mobile-nav .close-btn:hover,
+.mobile-nav .close-btn:focus-visible {
+    border-color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* --- search box (a button that opens the normal search bar) --- */
+.mm-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 18px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: inherit;
+    font-size: 0.95em;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.4s var(--ease-smooth), background-color 0.4s var(--ease-smooth);
+}
+
+.mm-search:hover,
+.mm-search:focus-visible {
+    border-color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav .mm-icon {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    filter: invert(1);                  /* dark svg icons -> white */
+}
+
+/* --- the 7 links --- */
+/* on tall phones the link rows grow (up to 64px each) so no big empty gap is left above the bottom block */
+.mobile-nav nav {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.mm-links {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    max-height: 460px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mm-links li {
+    display: flex;
+    flex: 1 1 44px;
+    max-height: 64px;
+    margin: 0;
+}
+
+.mm-links a {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;                   /* comfortable tap target */
+    padding: 0 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1.05em;
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    transition: color 0.4s var(--ease-smooth), padding-left 0.4s var(--ease-smooth);
+}
+
+.mm-links a:hover,
+.mm-links a:focus-visible {
+    padding-left: 10px;
+    color: var(--secondary-color);
+}
+
+/* current page: full white + a dot */
+.mm-links a.active {
+    color: var(--secondary-color);
+    font-weight: var(--fw-bold);
+}
+
+.mm-links a.active::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+}
+
+/* --- bottom block --- */
+.mm-bottom {
+    margin-top: auto;                   /* pushes this block to the bottom of the panel */
+    padding-top: 24px;
+}
+
+.mm-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.mm-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    background-color: transparent;
+    color: var(--secondary-color);
+    font-family: inherit;
+    font-size: 0.74em;
+    letter-spacing: var(--ls-tight);
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth), color 0.4s var(--ease-smooth);
+}
+
+.mm-btn:hover,
+.mm-btn:focus-visible {
+    border-color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* cart = main action: filled white */
+.mm-btn-primary {
+    grid-column: 1 / -1;
+    border-color: var(--secondary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: var(--fw-bold);
+}
+
+.mm-btn-primary:hover,
+.mm-btn-primary:focus-visible {
+    background-color: rgba(255, 255, 255, 0.86);
+}
+
+.mobile-nav .mm-btn-primary .mm-icon {
+    filter: none;                       /* dark icon on the white button */
+}
+
+.mm-count {
+    display: none;
+    min-width: 20px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 0.9em;
+    font-weight: var(--fw-bold);
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.mm-count.visible {
+    display: inline-block;
+}
+
+.mm-btn-primary .mm-count {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* the two half-width buttons: the number hangs on the corner (like the header icons), so it never makes the label wider */
+.mm-actions .mm-btn:not(.mm-btn-primary) .mm-count {
+    position: absolute;
+    top: -7px;
+    right: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+/* very small phones: one button per row */
+@media (max-width: 350px) {
+    .mm-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- social + copyright --- */
+.mm-social {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mm-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+
+.mm-social a:hover,
+.mm-social a:focus-visible {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.mobile-nav .mm-social .mm-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.mm-copy {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.75em;
+    letter-spacing: var(--ls-tight);
+    text-align: center;
+}
+
+.mobile-nav :focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* short phones (e.g. iPhone SE 375x667): tighter spacing so everything fits without scrolling.
+   Links stay 44px high (tap target); only the gaps shrink. Shorter than that -> the panel scrolls. */
+@media (max-height: 700px) {
+    .mobile-nav {
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: max(14px, env(safe-area-inset-bottom));
+    }
+    .mm-top { margin-bottom: 8px; }
+    .mm-brand-mark { height: 44px; }
+    .mm-brand-text { height: 36px; }
+    .mm-search { min-height: 44px; }
+    .mm-links { margin-top: 8px; }
+    .mm-bottom { padding-top: 10px; }
+    .mm-btn { min-height: 44px; }
+    .mm-social { margin-top: 10px; padding-top: 8px; }
+    .mm-copy { margin-top: 6px; }
+}
+
+/* =====================================================================
+   INNER PAGES (everything except home): header is ALWAYS white
+   ===================================================================== */
+body:not([data-page="home"]) .header {
+    padding: 15px 0;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--light-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body:not([data-page="home"]) .header .nav-links a,
+body:not([data-page="home"]) .header .hamburger {
+    color: var(--primary-color);
+}
+
+body:not([data-page="home"]) .header .nav-icon-img {
+    filter: none;
+}
+
+body:not([data-page="home"]) .header .logo img {
+    filter: none;
+    opacity: 1;
+}
+
+body:not([data-page="home"]) .header .cart-count {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width: 992px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 0 15px;
+    }
+
+    .hamburger {
+        display: block;
+        position: static;
+        order: 1;
+        flex-shrink: 0;
+        margin-left: 0;
+    }
+
+    .logo {
+        order: 2;
+        flex-grow: 1;
+        margin: 0 25px;
+        text-align: center;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+
+    .logo-text-img {
+        height: 50px;
+    }
+
+    .nav-icons {
+        position: static;
+        order: 3;
+        flex-shrink: 0;
+        gap: 15px;
+    }
+
+    .nav-icons > a {
+        margin-left: 0;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 12px;
+    }
+
+    .logo {
+        margin: 0 20px;
+    }
+
+    .logo img {
+        height: 46px;
+    }
+
+    .logo-text-img {
+        height: 46px;
+    }
+
+    .nav-icons {
+        gap: 12px;
+    }
+
+    .nav-icon-img {
+        height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 10px;
+    }
+
+    .logo {
+        margin: 0 10px;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .logo-text-img {
+        height: 40px;
+    }
+
+    .nav-icons {
+        gap: 9px;
+    }
+
+    .nav-icon-img {
+        height: 20px;
+    }
+
+    .hamburger {
+        font-size: 1.3em;
+    }
+}
+
+/* small phones: both logos (mark + "Collection" wordmark) stay visible, just a little smaller */
+@media (max-width: 380px) {
+    .logo {
+        margin: 0 8px;
+    }
+
+    .logo img,
+    .logo-text-img {
+        height: 36px;
+    }
+
+    .logo-text-img {
+        margin-left: 3px;
+    }
+}
+
+@media (max-width: 330px) {
+    .logo img,
+    .logo-text-img {
+        height: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header,
+    .logo img,
+    .nav-icon-img,
+    .mobile-nav,
+    .mm-backdrop,
+    .mm-links a,
+    .mm-btn,
+    .mm-social a,
+    .nav-links a::after {
+        transition: none;
+    }
+}

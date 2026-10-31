@@ -1,0 +1,167 @@
+<!--
+  =====================================================================
+  PARTIAL: header.html
+  Aliyan Collection — shared site chrome (loaded on every page)
+  Contains: Cart panel, Search bar + results, Mobile menu, Main header
+  ---------------------------------------------------------------------
+  {{BASE}} = relative path from the current page to the docs/ root.
+  It is replaced automatically by js/components/header.js
+    index.html            -> ""        (empty)
+    pages/shop/mens.html  -> "../../"
+  Never hard-code paths here; always start with {{BASE}}.
+  =====================================================================
+-->
+
+<!-- ===================== CART PANEL (slide-in) ===================== -->
+<div id="cart-panel" aria-label="Shopping cart" role="dialog" aria-hidden="true">
+    <div id="cart-header">
+        <h3>Shopping Cart (<span id="cart-count-panel">0</span>)</h3>
+        <span id="cart-close-btn" role="button" tabindex="0" aria-label="Close cart">✖</span>
+    </div>
+
+    <div id="cart-items-container">
+        <div id="cart-empty-message">Your cart is currently empty.</div>
+    </div>
+
+    <div id="cart-footer">
+        <div id="cart-total-info">
+            <span>Total:</span>
+            <span>$<span id="cart-total-price">0.00</span></span>
+        </div>
+        <a href="{{BASE}}pages/account/order.html" class="btn dark">Proceed to Checkout</a>
+    </div>
+</div>
+
+<!-- ===================== SEARCH BAR ===================== -->
+<div id="search-bar">
+    <div class="container">
+        <div class="search-input-wrapper">
+            <input type="text" id="search-input" placeholder="Search products..." autocomplete="off" aria-label="Search products">
+            <span id="search-close-btn-bar" role="button" tabindex="0" aria-label="Close search">✖</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== SEARCH RESULTS ===================== -->
+<div id="search-results-container">
+    <div class="search-message">Start typing to see matching products...</div>
+    <div class="search-product-grid"></div>
+</div>
+
+<!-- ===================== MOBILE MENU ===================== -->
+<div class="mm-backdrop" id="mobile-menu-backdrop" onclick="toggleMobileMenu()" aria-hidden="true"></div>
+<aside class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
+
+    <!-- top: brand mark + close -->
+    <div class="mm-top">
+        <a class="mm-brand" href="{{BASE}}index.html" aria-label="Aliyan Collection - Home" onclick="toggleMobileMenu()">
+            <img src="{{BASE}}assets/images/brand/logo-mark-floral.png" alt="" class="mm-brand-mark">
+            <img src="{{BASE}}assets/images/brand/logo-wordmark.png" alt="Aliyan Collection" class="mm-brand-text">
+        </a>
+        <div class="close-btn" onclick="toggleMobileMenu()" role="button" tabindex="0" aria-label="Close menu">
+            ✖
+        </div>
+    </div>
+
+    <!-- search: opens the normal search bar (js/components/header.js) -->
+    <button type="button" class="mm-search" data-mm="search" aria-label="Search products">
+        <img src="{{BASE}}assets/icons/ui/icon-search.svg" alt="" class="mm-icon">
+        <span>Search products...</span>
+    </button>
+
+    <!-- the 7 links -->
+    <nav aria-label="Mobile menu links">
+        <ul class="mm-links">
+            <li><a href="{{BASE}}index.html" data-nav="home" onclick="toggleMobileMenu()">Home</a></li>
+            <li><a href="{{BASE}}index.html#new-arrivals" data-nav="shop" onclick="toggleMobileMenu()">Shop</a></li>
+            <li><a href="{{BASE}}pages/shop/mens.html" data-nav="mens" onclick="toggleMobileMenu()">Men</a></li>
+            <li><a href="{{BASE}}pages/shop/women.html" data-nav="women" onclick="toggleMobileMenu()">Women</a></li>
+            <li><a href="{{BASE}}pages/shop/kids.html" data-nav="kids" onclick="toggleMobileMenu()">Kids</a></li>
+            <li><a href="{{BASE}}pages/info/blog.html" data-nav="blog" onclick="toggleMobileMenu()">Blog</a></li>
+            <li><a href="{{BASE}}pages/info/contact.html" data-nav="contact" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- bottom: account / wishlist / cart + social + copyright -->
+    <div class="mm-bottom">
+        <div class="mm-actions">
+            <a href="{{BASE}}pages/account/myaccount.html" class="mm-btn" onclick="toggleMobileMenu()">
+                <img src="{{BASE}}assets/icons/ui/icon-about.svg" alt="" class="mm-icon">
+                <span>My Account</span>
+            </a>
+            <a href="{{BASE}}pages/account/wishlist.html" class="mm-btn" onclick="toggleMobileMenu()">
+                <img src="{{BASE}}assets/icons/ui/icon-wishlist.svg" alt="" class="mm-icon">
+                <span>My Wishlist</span>
+                <span class="mm-count" data-badge="wishlist">0</span>
+            </a>
+            <button type="button" class="mm-btn mm-btn-primary" data-mm="cart">
+                <img src="{{BASE}}assets/icons/ui/icon-cart.svg" alt="" class="mm-icon">
+                <span>Cart</span>
+                <span class="mm-count" data-badge="cart">0</span>
+            </button>
+        </div>
+
+        <div class="mm-social">
+            <a href="https://facebook.com/creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <img src="{{BASE}}assets/icons/social/icon-facebook.svg" alt="" class="mm-icon">
+            </a>
+            <a href="https://instagram.com/creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="{{BASE}}assets/icons/social/icon-instagram.svg" alt="" class="mm-icon">
+            </a>
+            <a href="https://www.tiktok.com/@creativestudi0.pk_" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <img src="{{BASE}}assets/icons/social/icon-tiktok.svg" alt="" class="mm-icon">
+            </a>
+            <a href="https://wa.me/" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <img src="{{BASE}}assets/icons/social/icon-whatsapp.svg" alt="" class="mm-icon">
+            </a>
+        </div>
+
+        <p class="mm-copy">&copy; <span class="mm-year">2026</span> Aliyan Collection</p>
+    </div>
+</aside>
+
+<!-- ===================== MAIN HEADER ===================== -->
+<header class="header" id="home">
+    <div class="container navbar">
+
+        <div class="hamburger" onclick="toggleMobileMenu()" role="button" tabindex="0" aria-label="Open menu">
+            ☰
+        </div>
+
+        <nav aria-label="Main navigation">
+            <ul class="nav-links">
+                <li><a href="{{BASE}}index.html" data-nav="home">Home</a></li>
+                <li><a href="{{BASE}}pages/shop/mens.html" data-nav="mens">Men</a></li>
+                <li><a href="{{BASE}}pages/shop/women.html" data-nav="women">Women</a></li>
+                <li><a href="{{BASE}}pages/shop/kids.html" data-nav="kids">Kids</a></li>
+                <li><a href="{{BASE}}pages/info/blog.html" data-nav="blog">Blog</a></li>
+                <li><a href="{{BASE}}pages/info/contact.html" data-nav="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="logo">
+            <a href="{{BASE}}index.html" aria-label="Aliyan Collection - Home">
+                <img src="{{BASE}}assets/images/brand/logo-mark-floral.png" alt="Aliyan Collection Logo">
+                <img src="{{BASE}}assets/images/brand/logo-wordmark.png" alt="Aliyan Collection Text Logo" class="logo-text-img">
+            </a>
+        </div>
+
+        <div class="nav-icons">
+            <a href="#" id="search-icon-link" aria-label="Search">
+                <img src="{{BASE}}assets/icons/ui/icon-search.svg" alt="Search" class="nav-icon-img">
+            </a>
+            <a href="{{BASE}}pages/account/myaccount.html" id="about-icon-link" aria-label="My account">
+                <img src="{{BASE}}assets/icons/ui/icon-about.svg" alt="My Account" class="nav-icon-img">
+            </a>
+            <a href="{{BASE}}pages/account/wishlist.html" id="wishlist-icon-link" aria-label="Wishlist">
+                <img src="{{BASE}}assets/icons/ui/icon-wishlist.svg" alt="Wishlist" class="nav-icon-img">
+                <span class="cart-count" id="header-wishlist-count">0</span>
+            </a>
+            <a href="#" id="cart-icon-link" aria-label="Shopping cart">
+                <img src="{{BASE}}assets/icons/ui/icon-cart.svg" alt="Cart" class="nav-icon-img">
+                <span class="cart-count" id="header-cart-count">0</span>
+            </a>
+        </div>
+
+    </div>
+</header>

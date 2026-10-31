@@ -1,0 +1,74 @@
+/* =====================================================================
+   COMPONENT: toast.css
+   Aliyan Collection - small pop-up messages ("Added to cart" etc.).
+   Markup:  <div id="toast" role="status" aria-live="polite"></div>
+   js/components/toast.js adds the class .show for a few seconds.
+   Optional type classes (added by JS): .success  .error  .info
+   ===================================================================== */
+
+#toast,
+.toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    z-index: var(--z-toast);
+    max-width: calc(100vw - 32px);
+    padding: 13px 28px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 3px;
+    font-family: var(--font-main);
+    font-size: 0.88em;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.4px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(70px);
+    transition: transform 0.5s var(--ease-smooth),
+                opacity 0.5s var(--ease-smooth),
+                visibility 0s linear 0.5s;
+}
+
+#toast.show,
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition: transform 0.5s var(--ease-smooth),
+                opacity 0.5s var(--ease-smooth),
+                visibility 0s;
+}
+
+/* ------------------------- Types ------------------------- */
+#toast.success,
+.toast.success { border-left: 4px solid var(--color-success); }
+
+#toast.error,
+.toast.error   { border-left: 4px solid var(--color-error); }
+
+#toast.info,
+.toast.info    { border-left: 4px solid var(--color-focus); }
+
+/* ------------------------- Mobile ------------------------- */
+@media (max-width: 480px) {
+    #toast,
+    .toast {
+        bottom: 20px;
+        width: calc(100vw - 32px);
+        padding: 12px 18px;
+        font-size: 0.82em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #toast,
+    .toast,
+    #toast.show,
+    .toast.show {
+        transition: opacity 0.2s ease;
+    }
+}

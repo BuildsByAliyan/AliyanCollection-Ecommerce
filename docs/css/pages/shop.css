@@ -1,0 +1,359 @@
+/* =====================================================================
+   PAGE: shop.css  (pages/shop/mens.html, women.html, kids.html)
+   Aliyan Collection - category header, sidebar filters, toolbar,
+   grid-column selector, empty state.
+   The product cards themselves are styled in components/product-card.css
+   ===================================================================== */
+
+/* ------------------------- Category header ------------------------- */
+.category-header {
+    padding: 120px 0 30px;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--light-bg);
+}
+
+.category-header h1 {
+    margin-bottom: 5px;
+    font-size: 2.5em;
+    font-weight: var(--fw-bold);
+    text-align: center;
+}
+
+.category-header .sub-heading {
+    margin-bottom: 15px;
+    color: var(--color-text-muted);
+    font-size: 1.1em;
+    font-weight: var(--fw-regular);
+    text-align: center;
+}
+
+.breadcrumb {
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.breadcrumb a {
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-color);
+}
+
+.breadcrumb span {
+    color: var(--primary-color);
+    font-weight: var(--fw-bold);
+}
+
+/* ------------------------- Layout ------------------------- */
+.category-main-content {
+    padding: 50px 0;
+}
+
+.category-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.sidebar {
+    flex-shrink: 0;
+    width: 250px;
+}
+
+.main-content-area {
+    flex-grow: 1;
+    min-width: 0;                        /* lets the grid shrink inside flex */
+}
+
+/* ------------------------- Sidebar filters ------------------------- */
+.filter-group {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-bg);
+}
+
+.filter-group:last-of-type {
+    border-bottom: none;
+}
+
+.filter-group h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.1em;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+}
+
+.category-list a {
+    display: block;
+    padding: 8px 0;
+    color: var(--text-color);
+    font-size: 0.95em;
+    transition: color var(--transition-fast), padding-left var(--transition-base);
+}
+
+.category-list a:hover,
+.category-list a.active-category {
+    padding-left: 6px;
+    color: var(--primary-color);
+    font-weight: var(--fw-bold);
+}
+
+.filter-checkbox-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    cursor: pointer;
+}
+
+.filter-checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Price range (two stacked sliders: min + max) */
+.price-range-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price-range-display {
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-color);
+    font-size: 0.95em;
+    font-weight: var(--fw-bold);
+}
+
+.price-range-slider input[type="range"] {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-border-strong);
+    outline: none;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.price-range-slider input[type="range"]::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.price-range-slider input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color);
+    cursor: pointer;
+}
+
+.price-range-slider input[type="range"]::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-border-strong);
+}
+
+.full-width,
+.btn.full-width {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ------------------------- Toolbar ------------------------- */
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-bg);
+}
+
+.toolbar-left,
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.toolbar-left span {
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+}
+
+.toolbar select {
+    padding: 8px 10px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.toolbar select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.column-selector {
+    display: flex;
+    gap: 5px;
+}
+
+.column-selector button {
+    padding: 6px 10px;
+    border: 1px solid var(--light-bg);
+    background: var(--light-bg);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.column-selector button:hover,
+.column-selector button.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* ------------------------- No results ------------------------- */
+.no-results {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.no-results[hidden] {
+    display: none;
+}
+
+.no-results p {
+    margin-bottom: 20px;
+    color: var(--color-text-muted);
+    font-size: 1.1em;
+}
+
+/* Tiny fade-in when cards are re-rendered after filtering / sorting */
+.product-grid-listing .product-card {
+    animation: shopCardIn 0.6s var(--ease-smooth) both;
+}
+
+@keyframes shopCardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width: 992px) {
+    .category-header {
+        padding: 100px 0 25px;
+    }
+
+    .category-header h1 {
+        font-size: 2em;
+    }
+
+    .category-main-content {
+        padding: 30px 0;
+    }
+
+    .category-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--light-bg);
+    }
+
+    /* filters sit in a neat 2-column block on tablets */
+    .sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 30px;
+    }
+
+    .sidebar .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .category-header {
+        padding: 90px 0 20px;
+    }
+
+    .category-header h1 {
+        font-size: 1.7em;
+    }
+
+    .category-header .sub-heading {
+        font-size: 0.95em;
+    }
+
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .column-selector {
+        flex-wrap: wrap;
+    }
+
+    .toolbar-right {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar select {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-grid-listing .product-card {
+        animation: none;
+    }
+}

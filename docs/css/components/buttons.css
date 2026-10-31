@@ -1,0 +1,228 @@
+/* ---------- 2. BUTTONS (Masla 4: pill + gol arrow) ----------
+   <a class="btn btn--light btn--lg">Text <svg class="icon icon-flip">...arrow...</svg></a>
+
+   Variant : (default / --primary = neon green) | --light = safed | --ghost | --ghost-light (glass)
+   Size    : --sm | (md default) | --lg        --block = poori chaurai
+
+   Arrow: button ke aakhir mein jo seedha-bachcha <svg class="icon"> ho, woh ek gol
+   circle ke andar baithta hai (AirLume "Search Flights Now (->)" jaisa).
+   Circle ka rang button ke apne rang se ulta hai: green button -> kala circle + hara arrow.
+   Hover: halka upar uthna + glow, arrow circle ke andar aage sarakta hai.
+   RTL: .icon-flip arrow ko palat deta hai, arrow ki harkat bhi khud ulti ho jati hai.
+   Purani classes (btn, btn--sm/--lg, btn--light, btn--ghost-light, btn--ghost) wahi hain. */
+.btn {
+  --btn-bg: var(--green);
+  --btn-fg: var(--green-ink);
+  --btn-bd: transparent;
+  --btn-glow: var(--green-a35);
+  /* gol arrow ke rang: default = button ke rang ka ulta */
+  --btn-ic-bg: var(--btn-fg);
+  --btn-ic-fg: var(--btn-bg);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  min-height: var(--tap);
+  padding: 0.4em 1.45em;
+  border: 1.5px solid var(--btn-bd);
+  border-radius: var(--r-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease, transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) ease;
+}
+
+/* Arrow wale button: aakhir (inline-end) par kam padding, circle kinare ke qareeb */
+.btn:has(> .icon:last-child) {
+  padding-inline-end: 0.35em;
+}
+
+/* Roshni ki patti jo hover par button ke upar se guzarti hai */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: -60%;
+  z-index: -1;
+  width: 45%;
+  background: linear-gradient(var(--to-end), transparent, rgb(255 255 255 / 0.5), transparent);
+  transform: skewX(calc(-20deg * var(--flip)));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- gol arrow ---- */
+.btn > .icon {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.45em;
+  border-radius: 50%;
+  background: var(--btn-ic-bg);
+  color: var(--btn-ic-fg);
+  stroke-width: 2.2;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, transform var(--dur) var(--ease-out);
+}
+
+/* Arrow circle ke andar sarakta hai. .icon-flip ke scaleX(-1) ki wajah se RTL mein khud ulta */
+.btn > .icon path {
+  transition: translate var(--dur) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    --btn-bg: var(--green-bright);
+    color: var(--btn-fg);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -10px var(--btn-glow), 0 0 0 1px var(--btn-glow);
+  }
+
+  .btn:hover > .icon path {
+    translate: 2px 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn:hover::after {
+      opacity: 1;
+      animation: btn-shine 0.8s var(--ease-out) both;
+    }
+  }
+}
+
+@keyframes btn-shine {
+  from { inset-inline-start: -60%; }
+  to   { inset-inline-start: 130%; }
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+/* ---- variants ---- */
+.btn--primary {
+  /* default hi primary hai; yeh class sirf saaf likhne ke liye hai */
+  --btn-bg: var(--green);
+}
+
+.btn--light {
+  --btn-bg: var(--white);
+  --btn-fg: var(--gray-950);
+  --btn-glow: var(--green-a55);
+  /* circle ke rang .btn se aate hain (fg/bg ka ulta), isliye cta-band jaisi
+     jagah jahan --btn-bg/--btn-fg badle jate hain wahan bhi circle khud sahi dikhta hai */
+}
+
+@media (hover: hover) {
+  .btn--light:hover {
+    --btn-bg: var(--green);
+  }
+}
+
+/* Ghost: glass-outline. Arrow circle halka hara */
+.btn--ghost {
+  --btn-bg: var(--glass-bg);
+  --btn-fg: var(--ink);
+  --btn-bd: var(--line-strong);
+  --btn-glow: var(--green-a20);
+  --btn-ic-bg: var(--green-a12);
+  --btn-ic-fg: var(--green);
+}
+
+@media (hover: hover) {
+  .btn--ghost:hover {
+    --btn-bg: var(--green-a08);
+    --btn-bd: var(--green);
+    color: var(--green);
+  }
+}
+
+.btn--ghost-light {
+  --btn-bg: var(--glass-bg);
+  --btn-fg: var(--white);
+  --btn-bd: rgb(255 255 255 / 0.3);
+  --btn-ic-bg: rgb(255 255 255 / 0.12);
+  --btn-ic-fg: var(--white);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+@media (hover: hover) {
+  .btn--ghost-light:hover {
+    --btn-bg: var(--green-a08);
+    --btn-bd: var(--green);
+    --btn-ic-bg: var(--green-a20);
+    --btn-ic-fg: var(--green);
+    color: var(--green);
+  }
+}
+
+/* ---- sizes ---- */
+.btn--lg {
+  min-height: 3.6rem;
+  padding-inline: 1.9em;
+  font-size: var(--fs-md);
+}
+
+.btn--lg:has(> .icon:last-child) {
+  padding-inline-end: 0.4em;
+}
+
+.btn--sm {
+  min-height: 2.5rem;
+  padding: 0.3em 1.1em;
+  font-size: var(--fs-sm);
+}
+
+.btn--sm:has(> .icon:last-child) {
+  padding-inline-end: 0.3em;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Urdu button ke andar Nastaliq ko thori zyada jagah chahiye */
+:root[lang="ur"] .btn {
+  line-height: 1.9;
+  padding-block: 0.2em 0.4em;
+}
+
+/* Chhoti screen: bade buttons poori chaurai lein taake angoothe se dabana aasan ho */
+@media (max-width: 30rem) {
+  .hero__actions .btn,
+  .cta-band__actions .btn,
+  .error-page__actions .btn {
+    width: 100%;
+  }
+
+  .btn--lg {
+    padding-inline: 1.3em;
+  }
+}
+
+/* Motion band: na uthna, na sarakna, na chamak */
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+
+  .btn:hover > .icon path {
+    translate: none;
+  }
+}

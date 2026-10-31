@@ -1,0 +1,12 @@
+{
+  "name": "Aliyan Saleem",
+  "role": "Developer & Designer",
+  "portfolio": "https://portfolio-aliyan-saleem.vercel.app",
+  "email": "aliyandev.pk@gmail.com",
+  "show_email_on_site": false,
+  "socials": [
+    { "platform": "TODO: platform ka naam (Instagram / TikTok / ...)", "handle": "Creativestudi0.pk_", "url": "" },
+    { "platform": "GitHub", "handle": "", "url": "" },
+    { "platform": "LinkedIn", "handle": "", "url": "" }
+  ]
+}

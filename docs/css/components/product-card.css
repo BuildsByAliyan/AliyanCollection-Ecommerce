@@ -1,0 +1,391 @@
+/* =====================================================================
+   COMPONENT: product-card.css
+   Aliyan Collection - product cards + product grids.
+   Used on: home (new arrivals), shop pages, search results, wishlist,
+            related products. Cards are built by js/components/product-card.js
+   ---------------------------------------------------------------------
+   Two card layouts are supported (same class names as the old site):
+   A) HOME / SEARCH card
+        .product-card > img + .product-info (h4, .price, .btn.add-to-cart)
+   B) SHOP card (hover action bar)
+        .product-card > [.sale-tag] + a.product-link (img + .product-info)
+        + .product-actions (.action-btn.add-to-cart / .add-to-wishlist)
+   Grids:
+        .product-grid            -> home / search / related
+        .product-grid-listing    -> shop pages (.col-2 .col-3 .col-4 .col-list)
+   ===================================================================== */
+
+/* ------------------------- Grids ------------------------- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-grid-listing {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.product-grid-listing.col-4 { grid-template-columns: repeat(4, 1fr); }
+.product-grid-listing.col-3 { grid-template-columns: repeat(3, 1fr); }
+.product-grid-listing.col-2 { grid-template-columns: repeat(2, 1fr); }
+.product-grid-listing.col-list { grid-template-columns: 1fr; }
+
+/* Message shown when a filter returns nothing */
+.no-products-message {
+    grid-column: 1 / -1;
+    padding: 60px 0;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* ------------------------- Card ------------------------- */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    transition: box-shadow var(--transition-base);
+}
+
+.product-card[data-product-id] {
+    cursor: pointer;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.product-link {
+    display: block;
+    color: inherit;
+}
+
+.product-card img {
+    display: block;
+    width: 100%;
+    height: 350px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    background-color: var(--light-bg);       /* shows while the image loads */
+    transition: transform var(--transition-zoom);
+}
+
+.product-card:hover img {
+    transform: scale(1.03);
+}
+
+/* ------------------------- Text ------------------------- */
+.product-info {
+    min-height: 80px;
+    padding: 10px 0;
+}
+
+.product-sku {
+    margin-bottom: 5px;
+    color: #aaaaaa;
+    font-size: 0.75em;
+}
+
+.product-card h4,
+.product-info h4 {
+    margin-bottom: 5px;
+    font-size: 1em;
+    font-weight: var(--fw-regular);
+}
+
+.product-info .price,
+.product-price {
+    color: var(--primary-color);
+    font-size: 1.1em;
+    font-weight: var(--fw-bold);
+}
+
+.product-info .price {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.product-price .original-price,
+.price .original-price,
+.original-price {
+    margin-right: 10px;
+    color: #888888;
+    font-size: 0.9em;
+    font-weight: var(--fw-regular);
+    text-decoration: line-through;
+}
+
+/* ------------------------- Layout A: button inside the card ------------------------- */
+.product-info .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-color: var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    font-size: 0.8em;
+}
+
+.product-info .btn::after {
+    background-color: var(--primary-color);
+}
+
+.product-card:hover .product-info .btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.product-card:hover .product-info .btn::after {
+    display: none;
+}
+
+/* ------------------------- Sale tag ------------------------- */
+.sale-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    padding: 5px 10px;
+    background-color: #444444;
+    color: var(--secondary-color);
+    font-size: 0.8em;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-tight);
+}
+
+/* ------------------------- Layout B: hover action bar ------------------------- */
+.product-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transform: translateY(100%);
+    transition: transform 0.5s var(--ease-smooth);
+}
+
+.product-card:hover .product-actions,
+.product-card:focus-within .product-actions {
+    transform: translateY(0);
+}
+
+.action-btn {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    border: none;
+    background: transparent;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.action-btn:first-child {
+    border-right: 1px solid var(--light-bg);
+}
+
+.action-btn:hover {
+    background-color: var(--light-bg);
+}
+
+.action-btn img {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px 0 0;
+    transform: none;
+    transition: filter var(--transition-base);
+}
+
+/* Wishlist heart: filled state (product-card.js adds .in-wishlist / .active) */
+.action-btn.add-to-wishlist.in-wishlist,
+.action-btn.add-to-wishlist.active {
+    font-weight: var(--fw-bold);
+}
+
+/* ------------------------- List view (.col-list) ------------------------- */
+.product-grid-listing.col-list .product-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-bg);
+    text-align: left;
+    overflow: visible;
+}
+
+.product-grid-listing.col-list .product-card:hover {
+    box-shadow: none;
+}
+
+.product-grid-listing.col-list .product-link {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.product-grid-listing.col-list .product-card img {
+    flex-shrink: 0;
+    width: 200px;
+    height: 250px;
+    margin-bottom: 0;
+}
+
+.product-grid-listing.col-list .product-card:hover img {
+    transform: none;
+}
+
+.product-grid-listing.col-list .product-info {
+    min-height: auto;
+    padding: 0;
+}
+
+.product-grid-listing.col-list .product-actions,
+.product-actions.list-view-override {
+    position: static;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+}
+
+.product-grid-listing.col-list .action-btn {
+    flex-grow: 0;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--light-bg);
+}
+
+.product-grid-listing.col-list .action-btn:first-child {
+    border-right: none;
+}
+
+.product-grid-listing.col-list .action-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.product-grid-listing.col-list .action-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.product-grid-listing.col-list .action-btn:hover img {
+    filter: invert(1);
+}
+
+/* ------------------------- Touch screens (no hover) ------------------------- */
+@media (hover: none) {
+    .product-actions {
+        position: static;
+        transform: none;
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-top: 1px solid var(--light-bg);
+    }
+
+    .product-card:hover img {
+        transform: none;
+    }
+
+    .product-card .product-info .btn {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+    }
+}
+
+/* ------------------------- Responsive ------------------------- */
+@media (max-width: 1100px) {
+    .product-grid-listing,
+    .product-grid-listing.col-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .product-grid-listing,
+    .product-grid-listing.col-4,
+    .product-grid-listing.col-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card img {
+        height: 260px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-grid-listing.col-list .product-card,
+    .product-grid-listing.col-list .product-link {
+        flex-direction: column;
+    }
+
+    .product-grid-listing.col-list .product-card img {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid,
+    .product-grid-listing,
+    .product-grid-listing.col-4,
+    .product-grid-listing.col-3,
+    .product-grid-listing.col-2 {
+        gap: 12px;
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+
+    .product-info h4 {
+        font-size: 0.9em;
+    }
+
+    .product-info .price,
+    .product-price {
+        font-size: 1em;
+    }
+
+    .product-info .btn {
+        padding: 7px 12px;
+        font-size: 0.72em;
+    }
+
+    .action-btn {
+        padding: 11px 0;
+        font-size: 0.8em;
+    }
+
+    .action-btn img {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+}

@@ -1,0 +1,25 @@
+# robots.txt - Aliyan Collection
+#
+# IMPORTANT (GitHub Pages project site):
+#   This site is published at  https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/
+#   so this file is served from  /AliyanCollection-Ecommerce/robots.txt.
+#   Search engines read robots.txt ONLY from the domain root (https://buildsbyaliyan.github.io/robots.txt),
+#   so on the project URL they do NOT read this file. It starts working as soon as the site lives
+#   at a domain root (for example a custom domain such as https://www.yourbrand.com/).
+#   Until then, private pages are kept out of search results by the meta robots "noindex" tag
+#   inside each account page - see the note at the bottom.
+
+User-agent: *
+Allow: /
+
+# Private / transactional pages (account, wishlist, order, track order)
+# 1) path when the site is at a domain root (custom domain)
+Disallow: /pages/account/
+# 2) the same folder under the GitHub project name (if this file is ever served from the root of buildsbyaliyan.github.io)
+Disallow: /AliyanCollection-Ecommerce/pages/account/
+
+# Full absolute URL (a sitemap URL must always be absolute)
+Sitemap: https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/sitemap.xml
+
+# NOTE: Disallow only stops crawling; it does not remove a page that is already indexed or linked.
+# The reliable switch is <meta name="robots" content="noindex"> in the <head> of every page in docs/pages/account/.

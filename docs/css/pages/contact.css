@@ -1,0 +1,468 @@
+/* =====================================================================
+   PAGE: contact.css  (pages/info/contact.html)
+   Self-contained: works even if the shared variable/component CSS is
+   not loaded. All rules are scoped to .contact-page.
+   ===================================================================== */
+
+.contact-page {
+    --ct-ink: #111;
+    --ct-text: #555;
+    --ct-muted: #888;
+    --ct-line: #dcdcdc;
+    --ct-soft: #f6f6f4;
+    --ct-error: #c62828;
+    --ct-ok: #2e7d32;
+    --ct-max: 1200px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    color: var(--ct-text);
+    background: #fff;
+}
+
+/* make width/padding maths predictable even if reset.css is not loaded */
+.contact-page main,
+.contact-page main *,
+.contact-page main *::before,
+.contact-page main *::after {
+    box-sizing: border-box;
+}
+
+.contact-page main .container {
+    width: 100%;
+    max-width: var(--ct-max);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ------------------------- Hero video ------------------------- */
+.contact-page .page-hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 300px;
+    max-height: 560px;
+    overflow: hidden;
+    background: #000;
+}
+
+.contact-page .page-hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.contact-page .page-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .35), rgba(0, 0, 0, .1) 40%, rgba(0, 0, 0, .25));
+    pointer-events: none;
+}
+
+/* ------------------------- Shared headings ------------------------- */
+.contact-page .subtitle {
+    margin: 0 0 8px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--ct-muted);
+}
+
+.contact-page .section-sub-heading {
+    margin: 0 0 30px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ct-ink);
+}
+
+/* ------------------------- Button ------------------------- */
+.contact-page .ip-btn {
+    display: inline-block;
+    appearance: none;
+    cursor: pointer;
+    padding: 15px 38px;
+    border: 1px solid var(--ct-ink);
+    background: var(--ct-ink);
+    color: #fff;
+    font-family: inherit;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    transition: background .5s ease-in-out, color .5s ease-in-out, opacity .5s ease-in-out;
+}
+
+.contact-page .ip-btn:hover {
+    background: #fff;
+    color: var(--ct-ink);
+}
+
+.contact-page .ip-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.contact-page .ip-btn.light {
+    border-color: #fff;
+    background: #fff;
+    color: #000;
+}
+
+.contact-page .ip-btn.light:hover {
+    background: transparent;
+    color: #fff;
+}
+
+.contact-page .ip-btn:focus-visible,
+.contact-page input:focus-visible,
+.contact-page textarea:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
+}
+
+/* ------------------------- Form + details ------------------------- */
+.contact-page .contact-main {
+    padding: 80px 0;
+}
+
+.contact-page .contact-grid-wrapper {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.contact-page .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-page .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-page .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.contact-page .field label {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--ct-ink);
+}
+
+.contact-page .contact-form input,
+.contact-page .contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--ct-line);
+    border-radius: 0;
+    background: #fff;
+    color: var(--ct-ink);
+    font-family: inherit;
+    font-size: .95rem;
+    transition: border-color .5s ease-in-out;
+}
+
+.contact-page .contact-form textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.contact-page .contact-form input:focus,
+.contact-page .contact-form textarea:focus {
+    border-color: var(--ct-ink);
+}
+
+.contact-page .contact-form .invalid {
+    border-color: var(--ct-error);
+}
+
+.contact-page .field-error {
+    min-height: 1em;
+    font-size: .78rem;
+    color: var(--ct-error);
+}
+
+.contact-page .field-error:empty {
+    display: none;
+}
+
+/* honeypot: off-screen, never display:none (bots skip display:none) */
+.contact-page .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.contact-page .contact-form .ip-btn {
+    align-self: flex-start;
+}
+
+.contact-page .form-status {
+    margin: 0;
+    min-height: 1.4em;
+    font-size: .9rem;
+    line-height: 1.6;
+}
+
+.contact-page .form-status:empty {
+    display: none;
+}
+
+.contact-page .form-status.ok {
+    color: var(--ct-ok);
+}
+
+.contact-page .form-status.err {
+    color: var(--ct-error);
+}
+
+/* ------------------------- Contact details ------------------------- */
+.contact-page .contact-info-container {
+    padding: 36px 34px;
+    background: var(--ct-soft);
+}
+
+.contact-page .info-details-group {
+    padding: 20px 0;
+    border-top: 1px solid var(--ct-line);
+}
+
+.contact-page .info-details-group:first-of-type {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.contact-page .info-details-group:last-child {
+    padding-bottom: 0;
+}
+
+.contact-page .info-details-group h4 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ct-ink);
+}
+
+.contact-page .info-details-group p {
+    margin: 0 0 6px;
+    font-size: .92rem;
+    line-height: 1.7;
+    word-break: break-word;
+}
+
+/* Email / Phone / WhatsApp / Wholesale e-mail: look exactly like the plain text beside them
+   (same size, weight and colour as the paragraph, no underline - not even on hover).
+   They are still real links; hover dims them a little and the keyboard focus ring stays visible. */
+.contact-page .info-details-group p a {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity .5s ease-in-out;
+}
+
+.contact-page .info-details-group p a:hover {
+    text-decoration: none;
+    opacity: .7;
+}
+
+.contact-page .info-details-group p a:focus-visible {
+    outline: 2px solid var(--ct-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.contact-page .contact-social {
+    display: flex;
+    gap: 12px;
+}
+
+.contact-page .contact-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--ct-line);
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .5s ease-in-out;
+}
+
+.contact-page .contact-social a:hover {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+.contact-page .contact-social img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+/* ------------------------- Map ------------------------- */
+.contact-page .location-section {
+    padding: 0 0 80px;
+    text-align: center;
+}
+
+.contact-page .map-container {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border: 1px solid var(--ct-line);
+    background: var(--ct-soft);
+}
+
+.contact-page .map-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.contact-page .map-link {
+    margin: 16px 0 0;
+    font-size: .9rem;
+}
+
+.contact-page .map-link a {
+    color: var(--ct-ink);
+    font-weight: 700;
+}
+
+/* ------------------------- Newsletter ------------------------- */
+.contact-page .newsletter {
+    padding: 70px 0;
+    background: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.contact-page .newsletter h2 {
+    margin: 0 0 10px;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: #fff;
+}
+
+.contact-page .newsletter p {
+    margin: 0 0 26px;
+    color: rgba(255, 255, 255, .75);
+}
+
+.contact-page .newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.contact-page .newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #fff;
+    border-radius: 0;
+    background: #fff;
+    color: #000;
+    font-family: inherit;
+    font-size: .95rem;
+}
+
+.contact-page .newsletter .form-status {
+    margin-top: 16px;
+    color: #fff;
+}
+
+.contact-page .newsletter .form-status.ok {
+    color: #8be28f;
+}
+
+.contact-page .newsletter .form-status.err {
+    color: #ff9c9c;
+}
+
+/* ------------------------- Responsive ------------------------- */
+@media (max-width: 992px) {
+    .contact-page .contact-grid-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .contact-page .page-hero {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-page .contact-main {
+        padding: 56px 0;
+    }
+
+    .contact-page .location-section {
+        padding-bottom: 56px;
+    }
+
+    .contact-page .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-page .contact-form .ip-btn {
+        align-self: stretch;
+    }
+
+    .contact-page .contact-info-container {
+        padding: 28px 22px;
+    }
+
+    .contact-page .map-container {
+        height: 320px;
+    }
+
+    .contact-page .newsletter {
+        padding: 56px 0;
+    }
+
+    .contact-page .newsletter-form {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-page *,
+    .contact-page *::before,
+    .contact-page *::after {
+        transition: none !important;
+    }
+}

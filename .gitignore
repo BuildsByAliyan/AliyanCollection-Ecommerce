@@ -1,0 +1,38 @@
+# ===== Operating system files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ===== Editors / IDEs =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== Dependencies & build output (future use) =====
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# ===== Environment & secrets =====
+.env
+.env.*
+!.env.example
+
+# ===== Logs =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== Temporary / backup files =====
+*.tmp
+*.bak
+*.orig
+*.zip
+tmp/
+temp/

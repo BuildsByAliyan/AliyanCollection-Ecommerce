@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account: Login &amp; Register | Aliyan Collection</title>
+    <meta name="description" content="Account login and registration are coming soon at Aliyan Collection. You can still place an order without an account.">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Account: Login &amp; Register | Aliyan Collection">
+    <meta property="og:description" content="Account login and registration are coming soon at Aliyan Collection. You can still place an order without an account.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../../assets/images/brand/favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/cart-panel.css">
+    <link rel="stylesheet" href="../../css/components/product-card.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/toast.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../../css/pages/account.css">
+</head>
+<body data-page="myaccount" data-base="../../">
+
+    <noscript>
+        <p style="padding:16px;text-align:center;background:#000;color:#fff;font-family:Arial,sans-serif;">
+            Please enable JavaScript to browse products and use the shopping cart.
+        </p>
+    </noscript>
+
+    <!-- ===================== HEADER (cart, search, mobile menu, navbar) =====================
+         Filled automatically from partials/header.html by js/components/header.js -->
+    <div id="site-header"></div>
+
+    <!-- ===================== VIDEO BANNER ===================== -->
+    <section class="video-banner" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="metadata"
+               data-src-mobile="../../assets/videos/mobile/page-myaccount-mobile.mp4"
+               data-src-desktop="../../assets/videos/desktop/page-myaccount-desktop.mp4"
+               data-breakpoint="768"></video>
+    </section>
+
+    <!-- ===================== LOGIN / REGISTER ===================== -->
+    <main class="account-wrapper" id="main-content">
+        <!-- The page's single main heading (h1): visually hidden (.sr-only is in css/base/reset.css), still read by screen readers -->
+        <h1 class="sr-only">My Account at Aliyan Collection</h1>
+
+        <div class="container account-grid">
+
+            <!-- Login -->
+            <div class="auth-col">
+                <h2>Login</h2>
+                <div class="auth-notice">
+                    <p>Account login is coming soon. You can place your order without logging in.</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-user">Username or email address *</label>
+                        <input type="text" id="login-user" name="username" autocomplete="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password *</label>
+                        <input type="password" id="login-password" name="password" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="btn-auth">Log In</button>
+                </form>
+            </div>
+
+            <!-- Register -->
+            <div class="auth-col">
+                <h2>Register</h2>
+                <div class="auth-notice">
+                    <p>Registration is coming soon. Accounts are not available yet, so nothing you type here is saved.</p>
+                    <br>
+                    <p>You can still place an order without an account. See our <a href="../legal/privacy.html">Privacy Policy</a> for how we handle your information.</p>
+                </div>
+                <form id="regForm">
+                    <div class="form-group">
+                        <label for="reg-email">Email address *</label>
+                        <input type="email" id="reg-email" name="email" autocomplete="email" required>
+                    </div>
+                    <button type="submit" class="btn-auth">Register</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Status popup (shown by account.js after a form is submitted) -->
+    <div id="status-popup" role="status" aria-live="polite">Processing Request...</div>
+
+    <!-- ===================== FOOTER =====================
+         Filled automatically from partials/footer.html by js/components/footer.js -->
+    <div id="site-footer"></div>
+
+    <!-- ===================== SCRIPTS (order matters) ===================== -->
+    <!-- Config + data -->
+    <script src="../../js/config.js" defer></script>
+    <script src="../../js/core/video-loader.js" defer></script>
+    <script src="../../js/data/products.js" defer></script>
+
+    <!-- Core logic -->
+    <script src="../../js/core/utils.js" defer></script>
+    <script src="../../js/core/storage.js" defer></script>
+    <script src="../../js/core/cart.js" defer></script>
+    <script src="../../js/core/wishlist.js" defer></script>
+
+    <!-- Components -->
+    <script src="../../js/components/toast.js" defer></script>
+    <script src="../../js/components/header.js" defer></script>
+    <script src="../../js/components/footer.js" defer></script>
+    <script src="../../js/components/cart-panel.js" defer></script>
+    <script src="../../js/components/product-card.js" defer></script>
+
+    <!-- Page script -->
+    <script src="../../js/pages/account.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+/* =====================================================================
+   PAGE: about.css  (pages/info/about.html)
+   Self-contained: works even if the shared variable/component CSS is
+   not loaded. All rules are scoped to .about-page.
+   ===================================================================== */
+
+.about-page {
+    --ab-ink: #111;
+    --ab-text: #444;
+    --ab-muted: #777;
+    --ab-line: #e6e6e6;
+    --ab-soft: #f6f6f4;
+    --ab-white: #fff;
+    --ab-max: 1200px;
+    --ab-narrow: 820px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    color: var(--ab-text);
+    background: var(--ab-white);
+}
+
+/* make width/padding maths predictable even if reset.css is not loaded */
+.about-page main,
+.about-page main *,
+.about-page main *::before,
+.about-page main *::after {
+    box-sizing: border-box;
+}
+
+.about-page main .container {
+    width: 100%;
+    max-width: var(--ab-max);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-page main .about-narrow {
+    max-width: var(--ab-narrow);
+}
+
+.about-page main a {
+    transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* ------------------------- Banner ------------------------- */
+.about-banner {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, .08), transparent 50%),
+        linear-gradient(135deg, #000 0%, #1c1c1c 100%);
+    color: #fff;
+    text-align: center;
+    padding: 150px 0 80px;
+}
+
+.about-eyebrow {
+    margin: 0 0 14px;
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .65);
+}
+
+.about-banner h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: .04em;
+    line-height: 1.15;
+    color: #fff;
+}
+
+.about-banner-sub {
+    margin: 18px auto 0;
+    max-width: 560px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .8);
+}
+
+.about-breadcrumb {
+    margin-top: 26px;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+.about-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.about-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------- Intro ------------------------- */
+.about-intro {
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.about-intro h2,
+.about-closing h2 {
+    margin: 0 0 22px;
+    font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ab-ink);
+}
+
+.about-intro p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.about-page main strong {
+    color: var(--ab-ink);
+    font-weight: 700;
+}
+
+/* ------------------------- Section title ------------------------- */
+.about-section-title {
+    margin: 0 0 40px;
+    text-align: center;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ab-ink);
+}
+
+.about-section-title::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 16px auto 0;
+    background: var(--ab-ink);
+}
+
+/* ------------------------- Values ------------------------- */
+.about-values {
+    padding: 70px 0;
+    background: var(--ab-soft);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.value-card {
+    background: var(--ab-white);
+    border: 1px solid var(--ab-line);
+    padding: 34px 26px;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .08);
+}
+
+.value-num {
+    display: block;
+    margin-bottom: 18px;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--ab-muted);
+}
+
+.value-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ab-ink);
+}
+
+.value-card p {
+    margin: 0;
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+/* ------------------------- Story ------------------------- */
+.about-story {
+    padding: 80px 0 40px;
+}
+
+.story-block {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) 2fr;
+    gap: 40px;
+    padding: 38px 0;
+    border-top: 1px solid var(--ab-line);
+}
+
+.story-block:last-child {
+    border-bottom: 1px solid var(--ab-line);
+}
+
+.story-block h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ab-ink);
+}
+
+.story-index {
+    display: block;
+    margin-bottom: 10px;
+    font-size: .8rem;
+    letter-spacing: .2em;
+    color: var(--ab-muted);
+}
+
+.story-block p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+/* ------------------------- Closing ------------------------- */
+.about-closing {
+    margin-top: 40px;
+    padding: 90px 0;
+    background: #000;
+    text-align: center;
+}
+
+.about-closing h2 {
+    color: #fff;
+}
+
+.about-closing blockquote {
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, .85);
+}
+
+.closing-values {
+    margin: 34px 0 0;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/* ------------------------- Shop CTA ------------------------- */
+.about-shop {
+    padding: 80px 0 90px;
+}
+
+.shop-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.shop-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: #222;
+    text-decoration: none;
+}
+
+.shop-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-zoom);
+}
+
+.shop-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .65), transparent 55%);
+}
+
+.shop-card span {
+    position: absolute;
+    left: 24px;
+    bottom: 22px;
+    z-index: 1;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.shop-card:hover img {
+    transform: scale(1.03);
+}
+
+.about-contact-line {
+    margin: 40px 0 0;
+    text-align: center;
+}
+
+.about-contact-line a {
+    color: var(--ab-ink);
+    font-weight: 700;
+}
+
+/* ------------------------- Responsive ------------------------- */
+@media (max-width: 992px) {
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .story-block {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-banner {
+        padding: 120px 0 60px;
+    }
+
+    .about-intro {
+        padding: 56px 0 40px;
+    }
+
+    .about-values,
+    .about-shop {
+        padding: 56px 0;
+    }
+
+    .values-grid,
+    .shop-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-card {
+        aspect-ratio: 16 / 11;
+    }
+
+    .about-closing {
+        padding: 64px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-page *,
+    .about-page *::before,
+    .about-page *::after {
+        transition: none !important;
+    }
+}

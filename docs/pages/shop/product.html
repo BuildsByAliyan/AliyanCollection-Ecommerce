@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Aliyan Collection</title>
+    <meta name="description" content="Browse product details, sizes, specifications and shipping information at Aliyan Collection, an online fashion store in Karachi, Pakistan.">
+    <!-- canonical, og and twitter values below are only the fallback for visitors/crawlers without JavaScript;
+         js/pages/product.js replaces them with the selected product's own data (name, image, price, URL) -->
+    <link rel="canonical" href="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/pages/shop/product.html">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn ...) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aliyan Collection">
+    <meta property="og:title" content="Product Details | Aliyan Collection">
+    <meta property="og:description" content="Browse product details, sizes, specifications and shipping information at Aliyan Collection, an online fashion store in Karachi, Pakistan.">
+    <meta property="og:url" content="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/pages/shop/product.html">
+    <meta property="og:image" content="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/assets/images/brand/logo-monogram-light.jpg">
+    <meta property="og:image:alt" content="Aliyan Collection logo">
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Product Details | Aliyan Collection">
+    <meta name="twitter:description" content="Browse product details, sizes, specifications and shipping information at Aliyan Collection, an online fashion store in Karachi, Pakistan.">
+    <meta name="twitter:image" content="https://buildsbyaliyan.github.io/AliyanCollection-Ecommerce/assets/images/brand/logo-monogram-light.jpg">
+    <meta name="twitter:image:alt" content="Aliyan Collection logo">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../../assets/images/brand/favicon.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+
+    <!-- Component styles -->
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/cart-panel.css">
+    <link rel="stylesheet" href="../../css/components/product-card.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/toast.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../../css/pages/product.css">
+</head>
+<body data-page="product" data-base="../../">
+
+    <noscript>
+        <p style="padding:16px;text-align:center;background:#000;color:#fff;font-family:Arial,sans-serif;">
+            Please enable JavaScript to browse products and use the shopping cart.
+        </p>
+    </noscript>
+
+    <!-- ===================== HEADER (cart, search, mobile menu, navbar) =====================
+         Filled automatically from partials/header.html by js/components/header.js -->
+    <div id="site-header"></div>
+
+    <main id="main-content">
+
+        <!-- ===================== BREADCRUMB ===================== -->
+        <div class="breadcrumb-bar">
+            <div class="container">
+                <nav class="breadcrumb-inner" aria-label="Breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span class="bc-sep">&#8250;</span>
+                    <a href="mens.html" id="bc-cat-link">Shop</a>
+                    <span class="bc-sep">&#8250;</span>
+                    <span class="bc-current" id="bc-product-name" aria-current="page">Product</span>
+                </nav>
+            </div>
+        </div>
+
+        <!-- ===================== PRODUCT NOT FOUND =====================
+             Shown by product.js when the link has no valid product id -->
+        <section class="product-not-found" id="product-not-found" hidden>
+            <div class="container">
+                <!-- h2, not h1: the page's only h1 is the product name (#pd-name). Same look as before (inline style);
+                     product.js gives it role="heading" aria-level="1" when it is shown. -->
+                <h2 id="nf-heading" style="margin-bottom: 14px; font-size: 2em;">Product not found</h2>
+                <p>Sorry, we couldn&rsquo;t find the product you are looking for. It may have been removed or the link may be incorrect.</p>
+                <div class="not-found-actions">
+                    <a href="mens.html" class="btn dark">Shop Men</a>
+                    <a href="women.html" class="btn dark">Shop Women</a>
+                    <a href="kids.html" class="btn dark">Shop Kids</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PRODUCT DETAIL ===================== -->
+        <section class="product-section" id="product-section">
+            <div class="container">
+                <div class="product-layout">
+
+                    <!-- LEFT: main image -->
+                    <div class="product-images-col">
+                        <div class="main-img-wrap">
+                            <span class="sale-badge" id="pd-sale-badge" hidden>SALE</span>
+                            <img id="pd-main-img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='800'%3E%3Crect width='100%25' height='100%25' fill='%23f2f2f2'/%3E%3C/svg%3E" alt="Product image" width="600" height="800">
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: product info -->
+                    <div class="product-info-col">
+                        <p class="product-category-tag" id="pd-cat-tag">Collection</p>
+                        <h1 id="pd-name">Loading product&hellip;</h1>
+
+                        <!-- Rating: shown by product.js ONLY when the product has a real rating + reviewCount in products.js -->
+                        <div class="stars-row" id="pd-rating" hidden>
+                            <span class="stars" id="pd-stars"></span>
+                            <span class="review-cnt" id="pd-review-cnt"></span>
+                        </div>
+
+                        <div class="price-block">
+                            <span id="pd-price">$0.00</span>
+                            <span class="original-price-display" id="pd-orig-price"></span>
+                            <span class="discount-badge" id="pd-discount-badge"></span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <p class="short-desc" id="pd-desc">
+                            Premium quality crafted with careful attention to detail. Designed for lasting comfort and timeless style &mdash; a perfect addition to any wardrobe.
+                        </p>
+
+                        <!-- Size -->
+                        <p class="opt-label">Size <em id="pd-size-label">&mdash; M</em></p>
+                        <div class="size-row" id="size-row" role="group" aria-label="Select size">
+                            <button type="button" class="size-btn" data-size="XS">XS</button>
+                            <button type="button" class="size-btn" data-size="S">S</button>
+                            <button type="button" class="size-btn active" data-size="M">M</button>
+                            <button type="button" class="size-btn" data-size="L">L</button>
+                            <button type="button" class="size-btn" data-size="XL">XL</button>
+                        </div>
+
+                        <!-- Quantity + Add to Cart + Wishlist -->
+                        <div class="actions-row">
+                            <div class="qty-ctrl">
+                                <button type="button" id="qty-minus" aria-label="Decrease quantity">&#8722;</button>
+                                <div class="qty-display" id="qty-val" aria-live="polite">1</div>
+                                <button type="button" id="qty-plus" aria-label="Increase quantity">&#43;</button>
+                            </div>
+                            <button type="button" class="atc-btn" id="atc-btn">Add to Cart</button>
+                            <button type="button" class="wish-btn" id="wish-btn" title="Add to Wishlist" aria-label="Add to wishlist" aria-pressed="false">&#9825;</button>
+                        </div>
+
+                        <!-- Stock indicator: shown by product.js ONLY when the product has a real "stock" number in products.js -->
+                        <div class="stock-row" id="pd-stock-row" hidden>
+                            <div class="stock-dot"></div>
+                            <span id="pd-stock-text"></span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <!-- Meta info -->
+                        <div class="meta-list">
+                            <div>SKU: <strong id="pd-sku">&mdash;</strong></div>
+                            <div>Category: <strong id="pd-meta-cat">&mdash;</strong></div>
+                            <div>Condition: <strong id="pd-condition">&mdash;</strong></div>
+                            <div id="pd-availability-row" hidden>Availability: <strong id="pd-availability"></strong></div>
+                        </div>
+
+                        <!-- Share (links are completed by product.js with this page's URL) -->
+                        <div class="share-row">
+                            <span>Share:</span>
+                            <a class="share-pill" id="share-facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Share on Facebook" aria-label="Share on Facebook">f</a>
+                            <a class="share-pill" id="share-whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer" title="Share on WhatsApp" aria-label="Share on WhatsApp">W</a>
+                            <button type="button" class="share-pill" id="copy-link-btn" title="Copy link" aria-label="Copy product link">&#128279;</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== TABS ===================== -->
+        <section class="tabs-section">
+            <div class="container">
+                <div class="tabs-nav" role="tablist">
+                    <button type="button" class="tab-btn active" data-tab="desc" role="tab">Description</button>
+                    <button type="button" class="tab-btn" data-tab="specs" role="tab">Specifications</button>
+                    <button type="button" class="tab-btn" data-tab="reviews" role="tab" id="tab-btn-reviews">Reviews</button>
+                    <button type="button" class="tab-btn" data-tab="shipping" role="tab">Shipping &amp; Returns</button>
+                </div>
+
+                <div class="tab-pane active" id="tab-desc" role="tabpanel">
+                    <h3>Product Description</h3>
+                    <p id="tab-desc-body">This premium piece is part of our curated collection &mdash; thoughtfully designed and carefully crafted. From fabric selection to the final stitch, every detail matters. Whether you&rsquo;re dressing for a casual day out or a polished occasion, this piece effortlessly adapts to your lifestyle.</p>
+                    <p>Ethically sourced, responsibly made. Great fashion should feel good in every sense of the word.</p>
+                </div>
+
+                <div class="tab-pane" id="tab-specs" role="tabpanel">
+                    <h3>Specifications</h3>
+                    <table class="spec-table">
+                        <tbody>
+                            <tr><td>Material</td><td>Premium Blend Fabric</td></tr>
+                            <tr><td>Fit</td><td>Regular Fit</td></tr>
+                            <tr><td>Wash Care</td><td>Machine wash, 30&deg;C, gentle cycle</td></tr>
+                            <tr><td>Available Sizes</td><td>XS, S, M, L, XL</td></tr>
+                            <tr><td>Origin</td><td>Pakistan</td></tr>
+                            <tr><td>Condition</td><td id="spec-condition">Brand New</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Reviews: product.js fills this ONLY from real reviews in products.js; with none, the tab is removed -->
+                <div class="tab-pane" id="tab-reviews" role="tabpanel">
+                    <h3>Customer Reviews</h3>
+                    <div id="reviews-list"></div>
+                </div>
+
+                <div class="tab-pane" id="tab-shipping" role="tabpanel">
+                    <h3>Shipping Information</h3>
+                    <p><strong>Standard Delivery:</strong> 5&ndash;7 business days across Pakistan.</p>
+                    <p><strong>Express Delivery:</strong> 2&ndash;3 business days (additional charges apply).</p>
+                    <p><strong>Free Shipping</strong> on all orders above PKR 3,000.</p>
+                    <br>
+                    <h3>Returns &amp; Exchanges</h3>
+                    <p>Items can be returned within <strong>7 days</strong> of delivery &mdash; unused, unwashed, in original packaging. Contact us via WhatsApp or email. Exchanges subject to stock availability.</p>
+                    <p>Read our full <a href="../legal/return.html">Return Policy</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== RELATED PRODUCTS =====================
+             Cards are rendered by product.js from other products in the same category -->
+        <section class="related-section">
+            <div class="container">
+                <h2 class="sec-head">You May Also Like</h2>
+                <p class="sec-sub">Handpicked pieces that complement your selection</p>
+                <div class="related-grid" id="related-grid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER =====================
+         Filled automatically from partials/footer.html by js/components/footer.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast notifications (also created automatically by toast.js if missing) -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===================== SCRIPTS (order matters) ===================== -->
+    <!-- Config + data -->
+    <script src="../../js/config.js" defer></script>
+    <script src="../../js/data/products.js" defer></script>
+
+    <!-- Core logic -->
+    <script src="../../js/core/utils.js" defer></script>
+    <script src="../../js/core/storage.js" defer></script>
+    <script src="../../js/core/cart.js" defer></script>
+    <script src="../../js/core/wishlist.js" defer></script>
+
+    <!-- Components -->
+    <script src="../../js/components/toast.js" defer></script>
+    <script src="../../js/components/header.js" defer></script>
+    <script src="../../js/components/footer.js" defer></script>
+    <script src="../../js/components/cart-panel.js" defer></script>
+    <script src="../../js/components/product-card.js" defer></script>
+
+    <!-- Page script -->
+    <script src="../../js/pages/product.js" defer></script>
+</body>
+</html>
